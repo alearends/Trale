@@ -1,4 +1,5 @@
 <template>
+  <h1 className="text-3xl font-bold underline">Hi Everybody!</h1>
   <section>
     <router-view class="app-main" />
   </section>
