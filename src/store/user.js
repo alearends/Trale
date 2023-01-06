@@ -1,7 +1,7 @@
 // /store/user.js
 
 import { defineStore } from "pinia";
-import { supabase } from "../supabase";
+import { supabase } from "../supabase/supabase";
 
 export const useUserStore = defineStore("user", {
   state: () => ({
@@ -11,7 +11,9 @@ export const useUserStore = defineStore("user", {
   actions: {
     async fetchUser() {
       const user = await supabase.auth.user();
-      this.user = user;
+      if (user){    // se agregó esta condición por si acaso no existe un user. Originalmente, linea 14 era "this.user = user;" luego saltaba directo a linea 17 actual.
+        this.user = user;
+      }
     },
     async signUp(email, password) {
       const { user, error } = await supabase.auth.signUp({

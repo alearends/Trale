@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Colores:
+- Primario: #0067A3
+- Dark: #2A4657  */
+
+:root{
+    background-color:#0067A3 ;
+}
+
+.bg-trale {
+    background-color: #0067A3
+}
+
+.text-trale{
+    color: #0067A3
+}
+

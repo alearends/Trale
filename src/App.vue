@@ -1,15 +1,24 @@
 <template>
-  <h1 className="text-3xl font-bold underline">Hi Everybody!</h1>
+  <!-- <HomeNavBar /> -->
+  <!-- <h2 class="text-2xl mt-5 text-center text-white font-bold font-[Nunito]">The Trale</h2> -->
+  <!-- <FormAuth /> -->
+  <!-- <Register /> -->
+  <!-- <VueDraggable /> -->
   <section>
     <router-view class="app-main" />
   </section>
 </template>
 
 <script setup>
-import { onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useUserStore } from "./store/user.js";
+import HomeNavBar from './components/HomeNavBar.vue';
+// import Register from './components/Register.vue';
+// import FormAuth from './components/FormAuth.vue';
+
+// import VueDraggable from "./components/VueDraggable.vue";
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -29,4 +38,9 @@ onMounted(async () => {
     console.log(e);
   }
 });
+
 </script>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&family=Roboto:wght@100;300;400;500;700;900&display=swap");
+</style>
