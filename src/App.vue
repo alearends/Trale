@@ -1,11 +1,11 @@
 <template>
-  <!-- <HomeNavBar /> -->
-  <!-- <h2 class="text-2xl mt-5 text-center text-white font-bold font-[Nunito]">The Trale</h2> -->
-  <!-- <FormAuth /> -->
-  <!-- <Register /> -->
-  <!-- <VueDraggable /> -->
   <section>
+    <!-- <HomeNavBar /> -->
     <router-view class="app-main" />
+    <!-- <h2 class="text-2xl mt-5 text-center text-white font-bold font-[Nunito]">The Trale</h2> -->
+    <!-- <FormAuth /> -->
+    <!-- <Register /> -->
+    <!-- <VueDraggable /> -->
   </section>
 </template>
 
@@ -14,7 +14,7 @@ import { ref, onMounted } from "vue";
 import { storeToRefs } from "pinia";
 import { useRouter } from "vue-router";
 import { useUserStore } from "./store/user.js";
-import HomeNavBar from './components/HomeNavBar.vue';
+// import HomeNavBar from './components/HomeNavBar.vue';
 // import Register from './components/Register.vue';
 // import FormAuth from './components/FormAuth.vue';
 
@@ -25,14 +25,17 @@ const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
 
 onMounted(async () => {
+  console.log("Bienvenidos a mi App");
   try {
     await userStore.fetchUser(); // here we call fetch user
-    if (!user.value) {
+    if (!user.value) { 
+      console.log("aun no estas logueado");
       // redirect them to logout if the user is not there
-      router.push({ path: "/auth" });
+      router.push({ path: "/register" });
     } else {
       // continue to dashboard
-      router.push({ path: "/" });
+      console.log("ya eres de los nuestros");
+      router.push({ path: "/thetrale" });
     }
   } catch (e) {
     console.log(e);

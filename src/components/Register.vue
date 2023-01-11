@@ -6,17 +6,18 @@
         </div>
 
         <!-- Register -->
+        <h2 class="text-2xl text-white mb-4">Register</h2>
         <form @submit.prevent="register" class="bg-gray-100 shadow-md rounded px-16 pt-6 pb-8 m-4">
-            <h2 class="text-2xl text-white mb-4">Register</h2>
             <!-- Formulario aquí -->
-            <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2 font-[Nunito]" for="username">
-                    Nombre de usuario
-                </label>
-                <input
+                <div class="mb-6">
+                    <label class="block text-gray-700 text-sm font-bold mb-2 font-[Nunito]" for="username">
+                        Nombre de usuario
+                    </label>
+                    <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                     id="username" type="text" v-model="username">
-            </div>
+                </div>
+            
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2 font-[Nunito]" for="email">
                     Dirección de correo electrónico
@@ -44,7 +45,7 @@
             <div class="flex items-center justify-between mb-6 md:px-64">
                 <button
                     class="bg-trale text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700 hover:border-gray-100 hover:text-gray-100 duration-200 border-solid border-2 border-transparent font-[Nunito]"
-                    type="submit">
+                    type="submit" title="Registrarse en Trale">
                     Registrarse
                 </button>
                 <div class="text-center">
@@ -61,8 +62,10 @@
 import { ref } from "vue";
 import { supabase } from "../supabase/supabase";
 import { useRouter } from "vue-router";
+import { useUserStore } from "../store/user";
 
 //Create data/vars
+const userStore = useUserStore();
 const router = useRouter();
 const username = ref(null);
 const email = ref(null);
@@ -70,17 +73,15 @@ const password = ref(null);
 const verifyPassword = ref(null);
 const errorMsg = ref(null);
 
-//Register function
+//Register function (useUserStore)
 
 const register = async () => {
     if(password.value === verifyPassword.value){
         try{
-            const {error} = await supabase.auth.signUp({
-                email: email.value,
-                password: password.value,
-            });
+            const {error} = await userStore.signUp(email.value, password.value);
             if (error) throw error;
             router.push({name: "Login"});
+            console.log("los 2 passwords son iguales");
         } catch (error) {
             errorMsg.value = error.message;
         }
@@ -89,7 +90,28 @@ const register = async () => {
     setTimeout(() => {
         errorMsg.value = null;
     }, 5000);
-};
+}
+
+//Register function (original)
+
+// const register = async () => {
+//     if(password.value === verifyPassword.value){
+//         try{
+//             const {error} = await supabase.auth.signUp({
+//                 email: email.value,
+//                 password: password.value,
+//             });
+//             if (error) throw error;
+//             router.push({name: "Login"});
+//         } catch (error) {
+//             errorMsg.value = error.message;
+//         }
+//     }
+//     errorMsg.value = "Error: Passwords do not match";
+//     setTimeout(() => {
+//         errorMsg.value = null;
+//     }, 5000);
+// };
 
 // const validateForm = () => {
 //             if (this.password !== this.verifyPassword) {

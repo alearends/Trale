@@ -1,12 +1,13 @@
 // /store/task.js
 
 import { defineStore } from "pinia";
-import { supabase } from "../supabase";
+import { supabase } from "../supabase/supabase";
 
 export const useTaskStore = defineStore("tasks", {
   state: () => ({
     tasks: null,
   }),
+  
   actions: {
     async fetchTasks() {
       const { data: tasks } = await supabase

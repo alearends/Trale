@@ -1,7 +1,37 @@
 <template>
     <IntoNavBar />
     <!-- VueDraggable Component -->
-    <div class="flex flex-row justify-between items-center shadow-md rounded px-auto pt-6 pb-8 m-4 bg-gray-100">
+    <Priority />
+    <div>
+        <h2 class="text-bg-nav text-2xl text-center m-16" v-if="boards.length == 0">You don't have any boards</h2>
+        <div class="board-container px-auto py-2 my-2 mx-4" v-else>
+            <!-- <div class="flex flex-col py-2 bg-white border-gray-300 rounded board-color-trale" v-for="board in boards" :key="board.title" :style="{borderColor: board.color}">
+                <div class="flex flex-row justify-between items-center mx-2 my-1">
+                    <span class="font-bold wordmark-color">{{ board.title }}</span>
+                    <span class="flex flex-row items-center">
+                        <button
+                            class="bg-trale text-white font-bold px-2 rounded focus:outline-none focus:shadow-outline duration-200 border-none font-[Nunito]">+
+                            Add Item</button>
+                        <i class="fa-solid fa-ban"></i>
+                    </span>
+                </div>
+                <h3 class="text-gray-500 text-lg text-center m-4" v-if="board.items.length == 0">No items yet!!</h3>
+                <div class="flex flex-col mx-4" v-else>
+                    <div class="item-container rounded py-1 my-2" v-for="item in board.items" :key="item.title">
+                        <div class="flex flex-row justify-between items-center mx-2 my-1">
+                            <span><i class="fas fa-sort"></i>{{ item.title }}</span>
+                            <span>
+                                <i class="fas fa-check"></i>
+                                <i class="fas fa-trash"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+            <Board v-for="(board, index) in boards" :key="index" :board="board" />
+        </div>
+    </div>
+    <!-- <div class="flex flex-row justify-between items-center rounded px-auto pt-6 pb-8 m-4">
         <div class="flex flex-col md:w-1/3 py-2 bg-white border-gray-300 rounded">
             <h3 class="font-bold wordmark-color font-[Nunito] text-center">Sprint Backlog</h3>
             <draggable class="max-w-xs flex flex-col list-none list-inside m-2 font-[Nunito] rounded"
@@ -36,59 +66,154 @@
                 </template>
             </draggable>
         </div>
-    </div>
+    </div> -->
 </template>
     
-<script>
+<!-- FRENO: Hasta aca todo funciona bien -->
+
+<script setup>
+import { ref } from "vue";
 import draggable from "vuedraggable";
 import IntoNavBar from "../components/IntoNavBar.vue";
+import Board from "../components/Board.vue";
+import Priority from "../components/Priority.vue";
 
-export default {
-    name: 'App',
-    display: "App",
-    order: 1,
-    components: {
-    draggable,
-    IntoNavBar,
-},
-    data() {
-        return {
-            arrSprintBacklog: [
-                { name: "an agile task", id: 3 },
-                { name: "another agile task", id: 4 },
-                { name: "another agile task", id: 5 },
-            ],
-            arrDesingProcess: [
-                { name: "a design task", id: 1 },
-                { name: "another design task", id: 2 },
-            ],
-            arrDesingEnd: [
-                { name: "a design end", id: 1 },
-                { name: "another design end", id: 2 },
-            ],
-        };
+const boards = ref([
+    {
+        title: "test board 1",
+        color: "red",
+        items: [
+            {
+                title: "test item 1",
+                priority: "high",
+            },
+            {
+                title: "test item 2",
+                priority: "low",
+            },
+            {
+                title: "test item 3",
+                priority: "medium",
+            },
+        ],
     },
-    methods: {
-        add: function () {
-            this.list.push({ name: "a design task" });
-        },
-        replace: function () {
-            this.list = [{ name: "another design task" }];
-        },
-        clone: function (el) {
-            return {
-                name: el.name + " cloned"
-            };
-        },
-        log: function (evt) {
-            window.console.log(evt);
-        }
-    }
-};
+    {
+        title: "test board 2",
+        color: "orange",
+        items: [],
+    }, {
+        title: "test board 3",
+        color: "purple",
+        items: [
+        {
+                title: "test item 1",
+                priority: "high",
+            },
+            {
+                title: "test item 2",
+                priority: "none",
+            },
+            {
+                title: "test item 3",
+                priority: "medium",
+            },
+        ],
+    },
+]);
+
+
+// export default {
+//     name: 'App',
+//     display: "App",
+//     order: 1,
+//     components: {
+//     draggable,
+//     IntoNavBar,
+// },
+//     data() {
+//         return {
+//             arrSprintBacklog: [
+//                 { name: "an agile task", id: 3 },
+//                 { name: "another agile task", id: 4 },
+//                 { name: "another agile task", id: 5 },
+//             ],
+//             arrDesingProcess: [
+//                 { name: "a design task", id: 1 },
+//                 { name: "another design task", id: 2 },
+//             ],
+//             arrDesingEnd: [
+//                 { name: "a design end", id: 1 },
+//                 { name: "another design end", id: 2 },
+//             ],
+//         };
+//     },
+//     methods: {
+//         add: function () {
+//             this.list.push({ name: "a design task" });
+//         },
+//         replace: function () {
+//             this.list = [{ name: "another design task" }];
+//         },
+//         clone: function (el) {
+//             return {
+//                 name: el.name + " cloned"
+//             };
+//         },
+//         log: function (evt) {
+//             window.console.log(evt);
+//         }
+//     }
+// };
 </script>
     
 <style scoped>
 .bg-trale {
     background-color: #0067A3;
+}
+
+.text-bg-nav {
+    color: #E5E7EB;
+}
+
+.border-bg-trale {
+    border-color: #0067A3;
+}
+
+.board-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5em;
+}
+
+.board-color-trale{
+    border-top: 5px solid red;
+    border-radius: 6px;
+}
+
+.item-container{
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
+}
+
+.fa-ban{
+    color: red;
+    margin-left: .75em;
+    cursor: pointer;
+}
+
+.fa-trash {
+    color: gray;
+    margin-left: .75em;
+    cursor: pointer;
+}
+
+.fa-sort{
+    margin-right: .5em;
+    cursor: move;
+}
+
+.fa-check{
+    color: gray;
+    margin-left: .5em;
+    cursor: pointer;
 }
 </style>
