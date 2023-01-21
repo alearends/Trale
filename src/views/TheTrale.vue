@@ -72,11 +72,14 @@
 <!-- FRENO: Hasta aca todo funciona bien -->
 
 <script setup>
-import { ref } from "vue";
+import { ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from "vue";
 import draggable from "vuedraggable";
 import IntoNavBar from "../components/IntoNavBar.vue";
 import Board from "../components/Board.vue";
 import Priority from "../components/Priority.vue";
+
+console.log("TheTrale.vue was setup(beforeCreate and then Created)");
+
 
 const boards = ref([
     {
@@ -101,7 +104,8 @@ const boards = ref([
         title: "test board 2",
         color: "orange",
         items: [],
-    }, {
+    }, 
+    {
         title: "test board 3",
         color: "purple",
         items: [

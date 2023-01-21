@@ -8,20 +8,20 @@
         <!-- Login -->
         <form @submit.prevent="login" class="bg-gray-100 shadow-md rounded px-16 pt-6 pb-8 m-4">
             <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2 font-[Nunito]" for="username">
-                    Nombre de usuario
+                <label class="block text-gray-700 text-sm font-bold mb-2 font-[Nunito]" for="email">
+                    Dirección de correo electrónico
+                    <input
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="email" name="email" type="email" required v-model="email" placeholder="e-mail">
                 </label>
-                <input
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="username" type="text" v-model="username" required>
             </div>
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2 font-[Nunito]" for="password">
                     Contraseña
-                </label>
-                <input
+                    <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                     id="password" type="password" v-model="password" required>
+                </label>
             </div>
             <div class="flex items-center justify-between mb-6 md:px-64">
                 <button
@@ -45,24 +45,29 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref } from "vue";
 import {supabase} from '../supabase/supabase';
 import { useRouter } from 'vue-router';
+import { useUserStore } from "../store/user";
 
 //Create data/vars
 const router = useRouter();
-const username = ref(null);
-const password = ref(null);
+const username = ref('');
+const email = ref('');
+const password = ref('');
 const errorMsg = ref(null);
+const userStore = useUserStore()
 
 //Login function
 const login = async () => {
     try {
-        const {error} = await supabase.auth.signIn({
-            email: email.value,
-            password: password.value,
-        });
-        if (error) throw error;
+        //Podemos llamar a la store 
+        userStore.sigIn(email.value, password.value)
+        // const {error} = await supabase.auth.signInWithPassword({
+        //     email: email.value,
+        //     password: password.value,
+        // });
+        // if (error) throw error;
         router.push({name: "Home"});
     }
     catch(error){

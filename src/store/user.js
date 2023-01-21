@@ -7,39 +7,54 @@ export const useUserStore = defineStore("user", {
   state: () => ({
     user: null,
   }),
-
   actions: {
     async fetchUser() {
-      const user = await supabase.auth.user();
+      const { data: { user } } = await supabase.auth.getUser();
       if (user) {
-        // se agregó esta condición por si acaso no existe un user. Originalmente, linea 14 era "this.user = user;" luego saltaba directo a linea 17 actual (aa).
         this.user = user;
+        return user;
       }
     },
-    // Hacer sign up (register)
+    // Hacer sign up (register) - Create a new user
     async signUp(email, password) {
-      const { user, error } = await supabase.auth.signUp({
+      const { data, error,} = await supabase.auth.signUp({
         email: email,
         password: password,
       });
-      if (error) throw error;
-      if (user) {this.user = user; console.log("se hizo petición a supabase")}
     },
-    // Hacer sign in (login)
-    async signIn(email, password){
-      const {user, error} = await supabase.auth.signIn({
+    // Hacer sign in (login) with email and password
+    async signIn(email, password) {
+      const {data: {user}, error} = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
     });
     if (error) throw error;
     if (user) this.user = user;
-    console.log("iniciando", error, user) // para verificar funcionamiento (aa).
+    },
+    // Hacer sign in (login) with phone and password
+    async signInWithPhone(phone, password){
+      const { data, error } = await supabase.auth.signInWithPassword({
+        phone: phone,
+        password: password,
+      })
+    },
+    // After receiving a SMS with a OTP.
+    async signInWithPhoneAfter(phone, password){
+        const { data, error } = await supabase.auth.verifyOtp({
+        phone: phone,
+        token: token,
+      })
+    },
+    //Sign in with a third-party provider
+    async signThirdProvider(provider){
+      const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: provider
+      })
     },
     // Hacer log out
     async signOut(){
-      const {user} = await supabase.auth.signOut();
+      const { error } = await supabase.auth.signOut()
     },
-  },
 
   persist: {
     //se sacó Persist de actions (aa).
@@ -51,4 +66,6 @@ export const useUserStore = defineStore("user", {
       },
     ],
   },
-});
+}
+}
+)

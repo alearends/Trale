@@ -4,13 +4,15 @@
             <p class="title font-bold text-lg text-trale">{{title}}</p>
             <div class="flex flex-col w-full box-border my-4 mx-0">
                 <label class="text-trale font-bold">{{labelA}}</label>
-                <input type="text" v-model="inputA" class="p-1 mb-2 rounded border border-gray-400 w-300">
+                <input type="text" v-model="inputA" class="p-1 mb-2 rounded border border-gray-400 w-300">{{ inputA }}
                 <label class="text-trale font-bold">{{labelB}}</label>
                 <input :type="inputBtype" v-model="inputB" class="p-1 mb-1 rounded border border-gray-400 w-auto"> 
             </div>
             <p class="flex justify-end gap-1 text-right">
                 <button @click="handleCloseBtnClick" class="border-none py-1 px-2 rounded font-bold uppercase text-sm bg-wordmark-color text-white">Cancel</button>
-                <button @click="submit" class="border-none py-1 px-2 rounded font-bold uppercase text-sm bg-trale text-white">Submit</button>
+                <button 
+                @click="submit" 
+                class="border-none py-1 px-2 rounded font-bold uppercase text-sm bg-trale text-white">Submit</button>
             </p>
         </div>
     </div>
@@ -18,9 +20,14 @@
 
 <script setup>
 import { ref } from "vue";
+import {useBoardStore} from '../store/board'
+import { useUserStore } from "../store/user";
+
+const board = useBoardStore()
+const user = useUserStore()
 
 const props = defineProps(["title", "labelA", "labelB", "inputBtype"]);
-const emits = defineEmits(["close", "submit"]);
+const emits = defineEmits(["close", "submit", "inputA", "inputB"]);
 const inputA = ref("");
 const inputB = ref("");
 
@@ -28,9 +35,23 @@ function handleCloseBtnClick(){
     emits("close");
 }
 
-function submit(){
-    emits("submit");
+const data = ()=>({
+    inputA,
+    inputB
+})
+
+async function getUser() {
+    const myUser = await user.fetchUser()
+    console.log(myUser)
 }
+
+async function submit(){
+    // emits("submit", {inputA, inputB});
+    getUser()
+    await board.createBoards(inputA.value, user.id, inputB.value)
+}
+
+
 
 
 

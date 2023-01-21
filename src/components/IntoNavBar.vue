@@ -25,13 +25,14 @@
 
 <script setup>
 import AddBoardBtn from './AddBoardBtn.vue';
+
 function Menu(e) {
     e.name === 'menu' ? e.name = "close" : e.name = "menu"
 }
 
 //Logout function
-const logout = async () => {
-    await supabase.auth.signOut();
+const signOut = async () => {
+    const { error } = await supabase.auth.signOut();
     router.push({name: "Home"});
 };
 

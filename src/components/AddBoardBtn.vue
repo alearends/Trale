@@ -4,7 +4,14 @@
             @click="showModal = true" class="bg-trale font-bold text-white font-[Nunito] py-1 px-2 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700 hover:border-gray-100 hover:text-gray-100 duration-200 border-solid border-2 border-transparent"
             type="submit"> + add board
         </button>
-        <Modal v-if="showModal" title="Add Board" labelA="Board Title" labelB="Board Color" inputBtype="color" @close="showModal = false" @submit="handleSubmit" />
+        <Modal 
+        v-if="showModal" 
+        title="Add Board" 
+        labelA="Board Title" 
+        labelB="Board Color" 
+        inputBtype="color" 
+        @close="showModal = false" 
+        @submit="handleSubmit" />
     </span>
 </template>
 
@@ -12,15 +19,21 @@
 import { ref } from "vue";
 import Modal from '../components/Modal.vue';
 
-const showModal = ref(false)
+data: ()=>({
+    showModal
+})
 
-function handleSubmit(){
-console.log("Esto funciona")
+const showModal = ref(false);
+
+function handleSubmit(data){
+    // console.log("hello it was submit") //esto funciono!!
+    console.log(data)
 }
 
-// function handleClick(){
-//     this.showModal = true
-// } 
+
+// function handleSubmit(showModal){
+//     this.showModal = false;
+// }
 
 </script>
 

@@ -7,15 +7,16 @@
         </div>
 
         <!-- Login -->
-        <form @submit.prevent="login" class="bg-gray-100 shadow-md rounded px-16 pt-6 pb-8 m-4">
+        <form @submit.prevent="signInWithEmail" class="bg-gray-100 shadow-md rounded px-16 pt-6 pb-8 m-4">
             <h2 class="text-2xl font-bold text-trale mb-4">Login</h2>
             <div class="mb-6">
-                <label class="block text-gray-700 text-sm font-bold mb-2 font-[Nunito]" for="username">
-                    Nombre de usuario
+                <label class="block text-gray-700 text-sm font-bold mb-2 font-[Nunito]" for="email">
+                    Dirección de correo electrónico
                 </label>
                 <input
                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    id="username" type="text" v-model="username" required>
+                    id="email" type="email" required v-model="email">
+
             </div>
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2 font-[Nunito]" for="password">
@@ -54,19 +55,19 @@ import HomeNavBar from '../components/HomeNavBar.vue';
 
 //Create data/vars
 const router = useRouter();
-const username = ref(null);
+const email = ref(null);
 const password = ref(null);
 const errorMsg = ref(null);
 
 //Login function
-const login = async () => {
+const signInWithEmail = async () => {
     try {
-        const {error} = await supabase.auth.signIn({
+        const {data, error} = await supabase.auth.signInWithPassword({
             email: email.value,
             password: password.value,
         });
         if (error) throw error;
-        router.push({name: "Home"});
+        router.push({name: "TheTrale"});
     }
     catch(error){
         errorMsg.value = `Error: ${error.message}`;

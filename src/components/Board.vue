@@ -26,7 +26,8 @@
 </template>
 
 <script setup>
-import Item from  "./Item.vue"
+import Item from  "../components/Item.vue"
+import draggable from "vuedraggable";
 const props = defineProps(["board"]);
 
 </script>

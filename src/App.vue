@@ -24,23 +24,23 @@ const router = useRouter();
 const userStore = useUserStore();
 const { user } = storeToRefs(userStore);
 
-onMounted(async () => {
-  console.log("Bienvenidos a mi App");
-  try {
-    await userStore.fetchUser(); // here we call fetch user
-    if (!user.value) { 
-      console.log("aun no estas logueado");
-      // redirect them to logout if the user is not there
-      router.push({ path: "/register" });
-    } else {
-      // continue to dashboard
-      console.log("ya eres de los nuestros");
-      router.push({ path: "/thetrale" });
-    }
-  } catch (e) {
-    console.log(e);
-  }
-});
+// onMounted(async () => {
+//   console.log("Bienvenidos a mi App");
+//   try {
+//     await userStore.fetchUser(); // here we call fetch user
+//     if (!user.value) { 
+//       console.log("aun no estas logueado");
+//       // redirect them to logout if the user is not there
+//       router.push({ path: "/register" });
+//     } else {
+//       // continue to dashboard
+//       console.log("ya eres de los nuestros");
+//       router.push({ path: "/thetrale" });
+//     }
+//   } catch (e) {
+//     console.log(e);
+//   }
+// });
 
 </script>
 
