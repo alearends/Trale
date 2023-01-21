@@ -4,7 +4,7 @@ import { defineStore } from "pinia";
 import { supabase } from "../supabase/supabase";
 
 
-export const useBoardStore = defineStore("boards", {
+export const useBoardStore = defineStore("Boards", {
   state: () => ({
     boards: null,
   }),
@@ -15,7 +15,7 @@ export const useBoardStore = defineStore("boards", {
       //   throw new Error("Usuario no autenticado");
       // }
       const { data: boards } = await supabase
-        .from("boards")
+        .from("Boards")
         .select("*")
         .where({user_id: auth.currentUser.id})
         .order("id", { ascending: false });
@@ -42,11 +42,13 @@ export const useBoardStore = defineStore("boards", {
     },
     async deleteBoards(board_id) {
       const { data, error } = await supabase
-        .from("boards")
+        .from("Boards")
         .delete()
         .match({ id: board_id }).catch(e => console.error(e));
       return {data, error};
     },
+
+
     async updateTitleBoard(title, board_id) {
       const { data, error } = await supabase
         .from("boards")
@@ -56,21 +58,21 @@ export const useBoardStore = defineStore("boards", {
     },
     async updateIsCompleteBoard(is_complete, board_id) {
       const { data, error } = await supabase
-        .from("boards")
+        .from("Boards")
         .update({ is_complete: is_complete })
         .match({ id: board_id }).catch(e => console.error(e));
       return {data, error};
     },
     async updateColorBoard(color, board_id) {
       const { data, error } = await supabase
-        .from("boards")
+        .from("Boards")
         .update({ color: color })
         .match({ id: board_id }).catch(e => console.error(e));
       return {data, error};
     },
     async getBoard(board_id) {
       const { data, error } = await supabase
-        .from("boards")
+        .from("Boards")
         .select("*")
         .match({ id: board_id }).catch(e => console.error(e));
       return {data, error};

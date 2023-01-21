@@ -6,7 +6,9 @@
                 <button
                     class="bg-trale text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline duration-200 border-none font-[Nunito]">+
                     Add Item</button>
-                <i class="fa-solid fa-ban"></i>
+                    <button @click="boardDelete" type="button">
+                        <i class="fa-solid fa-ban"></i>
+                    </button>
             </span>
         </div>
         <h3 class="text-gray-500 text-lg text-center m-4" v-if="board.items.length == 0">No items yet!!</h3>
@@ -28,7 +30,14 @@
 <script setup>
 import Item from  "../components/Item.vue"
 import draggable from "vuedraggable";
+import { useBoardStore } from "../store/board";
+
+const boardStore = useBoardStore();
 const props = defineProps(["board"]);
+
+async function boardDelete(){
+    await boardStore.deleteBoards(task)
+    }
 
 </script>
 

@@ -49,6 +49,7 @@ import { ref } from "vue";
 import {supabase} from '../supabase/supabase';
 import { useRouter } from 'vue-router';
 import { useUserStore } from "../store/user";
+import { useBoardStore } from "../store/board";
 
 //Create data/vars
 const router = useRouter();
@@ -57,6 +58,7 @@ const email = ref('');
 const password = ref('');
 const errorMsg = ref(null);
 const userStore = useUserStore()
+
 
 //Login function
 const login = async () => {
@@ -77,6 +79,8 @@ const login = async () => {
         }, 5000);
     }
 }
+
+
 
 </script>
 

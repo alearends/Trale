@@ -1,3 +1,5 @@
+<!-- Freno de emergencia: se acaba de hacer el commit "Board conectado a Supabase" -->
+
 <template>
     <div class="flex justify-center content-center items-center fixed top-0 left-0 h-screen w-screen bg-gray-900/50 modal-content">
         <div class="bg-white p-3 w-9/10 max-w-sm rounded shadow-md ">
@@ -17,6 +19,8 @@
         </div>
     </div>
 </template>
+
+<!-- inputA = Board Title  - inputB = Board Color -->
 
 <script setup>
 import { ref } from "vue";

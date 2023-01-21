@@ -69,16 +69,35 @@
     </div> -->
 </template>
     
-<!-- FRENO: Hasta aca todo funciona bien -->
-
 <script setup>
 import { ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from "vue";
 import draggable from "vuedraggable";
 import IntoNavBar from "../components/IntoNavBar.vue";
 import Board from "../components/Board.vue";
 import Priority from "../components/Priority.vue";
+import {useBoardStore} from '../store/board'
+import { useUserStore } from "../store/user";
+
+const board = useBoardStore()
+const user = useUserStore()
 
 console.log("TheTrale.vue was setup(beforeCreate and then Created)");
+
+// onMounted(){
+//     (data) => {
+//         this.boards.push({
+//             title: data.inputA,
+//             color: data.inputB || "#000",
+//             BoardId: id_board
+//             items: []
+//         })
+//     }
+// }
+
+// const boardFromSupabase = ref("");
+// onMounted( async()=>{
+
+// })
 
 
 const boards = ref([
