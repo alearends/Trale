@@ -89,14 +89,17 @@ const boards = ref([
             {
                 title: "test item 1",
                 priority: "high",
+                id_task: "11",
             },
             {
                 title: "test item 2",
                 priority: "low",
+                id_task: "12",
             },
             {
                 title: "test item 3",
                 priority: "medium",
+                id_task: "13",
             },
         ],
     },
@@ -112,14 +115,17 @@ const boards = ref([
         {
                 title: "test item 1",
                 priority: "high",
+                id_task: "31",
             },
             {
                 title: "test item 2",
                 priority: "none",
+                id_task: "32",
             },
             {
                 title: "test item 3",
                 priority: "medium",
+                id_task: "33",
             },
         ],
     },

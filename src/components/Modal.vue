@@ -29,26 +29,26 @@ const user = useUserStore()
 const props = defineProps(["title", "labelA", "labelB", "inputBtype"]);
 const emits = defineEmits(["close", "submit", "inputA", "inputB"]);
 const inputA = ref("");
-const inputB = ref("");
+const inputB = ref("#000");
 
 function handleCloseBtnClick(){
     emits("close");
 }
 
-const data = ()=>({
-    inputA,
-    inputB
-})
+// const data = ()=>({
+//     inputA,
+//     inputB
+// })
 
 async function getUser() {
     const myUser = await user.fetchUser()
-    console.log(myUser)
+    return myUser;
 }
 
 async function submit(){
     // emits("submit", {inputA, inputB});
-    getUser()
-    await board.createBoards(inputA.value, user.id, inputB.value)
+    const myUser = await getUser()
+    await board.createBoards(inputA.value, myUser.id, inputB.value)
 }
 
 

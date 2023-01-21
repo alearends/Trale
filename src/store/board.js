@@ -3,6 +3,7 @@
 import { defineStore } from "pinia";
 import { supabase } from "../supabase/supabase";
 
+
 export const useBoardStore = defineStore("boards", {
   state: () => ({
     boards: null,
@@ -10,20 +11,27 @@ export const useBoardStore = defineStore("boards", {
 
   actions: {
     async fetchBoards() {
+      // if (!auth.currentUser) {
+      //   throw new Error("Usuario no autenticado");
+      // }
       const { data: boards } = await supabase
         .from("boards")
         .select("*")
+        .where({user_id: auth.currentUser.id})
         .order("id", { ascending: false });
       this.boards = boards;
     },
     async createBoards(title, user_id, color) {
     try {
+      // if (!auth.currentUser) {
+      //   throw new Error("Usuario no autenticado");
+      // }
       console.log(title, user_id, color)
-      const { data, error } = await supabase.from("boards").insert([
+      const { data, error } = await supabase.from("Boards").insert([
         {
-          title: title,
-          color: color,
-          user_id: user_id,
+          title,
+          color,
+          user_id
         },
       ]);
       if(error) throw error
@@ -70,17 +78,4 @@ export const useBoardStore = defineStore("boards", {
   },
 });
 
-// actions: {
-//     const addBoard = async (board)=>{
-//         try{
-//             await db.board.insert({
-//                 title: board.title,
-//                 color: board.color,
-//             });
-//             console.log("tablero insertado con exito");
-//         }catch(error){
-//             console.log(error);
-//         }
-//     },
 
-// }
