@@ -56,7 +56,7 @@ onMounted(async () =>{
 
 
 async function boardDelete(){
-    await boardStore.deleteBoards(task)
+    await boardStore.deleteBoards(props.boardFromParent.id)
     }
 
 </script>

@@ -55,9 +55,12 @@ async function submit(){
     await board.createBoards(inputA.value, myUser.id, inputB.value);
     console.log(inputA.value, myUser.id, inputB.value);
     emits("close");
+    refreshPage();
 }
 
-
+function refreshPage(){
+    location.reload()
+}
 
 
 
