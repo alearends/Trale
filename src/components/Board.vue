@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col py-2 bg-white border-gray-300 rounded board-color-trale" :style="{borderColor: board.color}">
+    <div class="flex flex-col py-2 bg-white border-gray-300 rounded board-color-trale" :style="{borderColor: boardFromParent.color}">
         <div class="flex flex-row justify-between items-center mx-2 my-1">
             <span class="font-bold wordmark-color">{{ boardFromParent.title }}</span>
             <span class="flex flex-row items-center">
