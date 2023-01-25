@@ -4,8 +4,8 @@
     <div class="flex flex-col md:w-1/3 p-2 mx-4 bg-white border-gray-300 rounded">
         <h3 class="font-bold wordmark-color font-[Nunito]">Sprint Backlog</h3>
         <draggable class="max-w-xs flex flex-col list-none list-inside m-2 font-[Nunito] rounded" :list="arrSprintBacklog" group="tasks"
-            @change="log" v-model="arrSprintBacklog" item-key="name">
-            <template #item="{ element, index }">
+            @change="log" v-model="arrSprintBacklog" task-key="name">
+            <template #task="{ element, index }">
                 <div class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium bg-gray-100 border text-gray-800 -mt-px font-[Nunito] rounded">
                     {{ element.name }}{{ index }}
                 </div>
@@ -15,8 +15,8 @@
     <div class="flex flex-col md:w-1/3 p-2 mx-4 bg-white border-gray-300 rounded">
         <h3 class="font-bold wordmark-color font-[Nunito]">Design Process</h3>
         <draggable class="max-w-xs flex flex-col list-none list-inside m-2 font-[Nunito] rounded" :list="arrDesingProcess" group="tasks"
-            @change="log" v-model="arrDesingProcess" item-key="name">
-            <template #item="{ element, index }">
+            @change="log" v-model="arrDesingProcess" task-key="name">
+            <template #task="{ element, index }">
                 <div
                     class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium bg-gray-100 border text-gray-800 -mt-px font-[Nunito] rounded">
                     {{ element.name }}{{ index }}</div>
@@ -26,8 +26,8 @@
     <div class="flex flex-col md:w-1/3 p-2 mx-4 bg-white border-gray-300 rounded">
         <h3 class="font-bold wordmark-color font-[Nunito]">Design End</h3>
         <draggable class="max-w-xs flex flex-col list-none list-inside m-2 font-[Nunito] rounded" :list="arrDesingEnd" group="tasks"
-            @change="log" v-model="arrDesingEnd" item-key="name">
-            <template #item="{ element, index }">
+            @change="log" v-model="arrDesingEnd" task-key="name">
+            <template #task="{ element, index }">
                 <div
                     class="inline-flex items-center gap-x-2 py-3 px-4 text-sm font-medium bg-gray-100 border text-gray-800 -mt-px font-[Nunito] rounded">
                     {{ element.name }}{{ index }}</div>

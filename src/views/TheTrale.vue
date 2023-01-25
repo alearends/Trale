@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div> -->
-            <Board v-for="(board, index) in boards" :key="index" :board="board" />
+            <Board v-for="(board, index) in boards" :key="index" :boardFromParent="board" />
         </div>
     </div>
     <!-- <div class="flex flex-row justify-between items-center rounded px-auto pt-6 pb-8 m-4">
@@ -70,85 +70,55 @@
 </template>
     
 <script setup>
-import { ref, onBeforeMount, onMounted, onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted } from "vue";
+import { ref, onMounted } from "vue";
 import draggable from "vuedraggable";
 import IntoNavBar from "../components/IntoNavBar.vue";
 import Board from "../components/Board.vue";
 import Priority from "../components/Priority.vue";
-import {useBoardStore} from '../store/board'
+import {useBoardStore} from '../store/board';
+import {useTaskStore} from '../store/task';
 import { useUserStore } from "../store/user";
+import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
 
 const board = useBoardStore()
-const user = useUserStore()
+const task = useTaskStore();
+const userStore = useUserStore()
+const { user } = storeToRefs(userStore)
+const router = useRouter()
 
-console.log("TheTrale.vue was setup(beforeCreate and then Created)");
+const boards = ref([])
 
-// onMounted(){
-//     (data) => {
-//         this.boards.push({
-//             title: data.inputA,
-//             color: data.inputB || "#000",
-//             BoardId: id_board
-//             items: []
-//         })
-//     }
-// }
+// this.boards.push({
+//     title: data.inputA,
+//     color: data.inputB || "#000",
+//     id_board: "",
+//     tasks: [],
+// })
 
-// const boardFromSupabase = ref("");
-// onMounted( async()=>{
+onMounted(async () =>{
+    console.log("esto esta Montado");
+    try{
+        const res = await board.fetchBoards(); 
+        boards.value = res;
+    }catch(error){
+        console.log(error);
+    }
+});
 
+// this.tasks.push({
+//     title: title.task,
+//     taskId: id_task,
 // })
 
 
-const boards = ref([
-    {
-        title: "test board 1",
-        color: "red",
-        items: [
-            {
-                title: "test item 1",
-                priority: "high",
-                id_task: "11",
-            },
-            {
-                title: "test item 2",
-                priority: "low",
-                id_task: "12",
-            },
-            {
-                title: "test item 3",
-                priority: "medium",
-                id_task: "13",
-            },
-        ],
-    },
-    {
-        title: "test board 2",
-        color: "orange",
-        items: [],
-    }, 
-    {
-        title: "test board 3",
-        color: "purple",
-        items: [
-        {
-                title: "test item 1",
-                priority: "high",
-                id_task: "31",
-            },
-            {
-                title: "test item 2",
-                priority: "none",
-                id_task: "32",
-            },
-            {
-                title: "test item 3",
-                priority: "medium",
-                id_task: "33",
-            },
-        ],
-    },
-]);
+
+
+
+
+
+
+
 
 
 // export default {

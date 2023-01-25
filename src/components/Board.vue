@@ -1,39 +1,59 @@
 <template>
     <div class="flex flex-col py-2 bg-white border-gray-300 rounded board-color-trale" :style="{borderColor: board.color}">
         <div class="flex flex-row justify-between items-center mx-2 my-1">
-            <span class="font-bold wordmark-color">{{ board.title }}</span>
+            <span class="font-bold wordmark-color">{{ boardFromParent.title }}</span>
             <span class="flex flex-row items-center">
                 <button
                     class="bg-trale text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline duration-200 border-none font-[Nunito]">+
-                    Add Item</button>
+                    Add Task</button>
                     <button @click="boardDelete" type="button">
                         <i class="fa-solid fa-ban"></i>
                     </button>
             </span>
         </div>
-        <h3 class="text-gray-500 text-lg text-center m-4" v-if="board.items.length == 0">No items yet!!</h3>
+        <h3 class="text-gray-500 text-lg text-center m-4" v-if="tasks.length == 0">No tasks yet!!</h3>
         <div class="flex flex-col mx-4" v-else>
-            <!-- <div class="item-container rounded py-1 my-2" v-for="(item, index) in board.items" :key="index">
+            <!-- <div class="task-container rounded py-1 my-2" v-for="(task, index) in board.tasks" :key="index">
                 <div class="flex flex-row justify-between items-center mx-2 my-1">
-                    <span><i class="fas fa-sort"></i>{{ item.title }}</span>
+                    <span><i class="fas fa-sort"></i>{{ task.title }}</span>
                     <span>
                         <i class="fas fa-check"></i>
                         <i class="fas fa-trash"></i>
                     </span>
                 </div>
             </div> -->
-            <Item v-for="(item, index) in board.items" :key="index" :item="item" :clr="board.color" />
+            <Task v-for="(task, index) in tasks" :key="index" :task="task" :clr="board.color" />
         </div>
     </div>
 </template>
 
 <script setup>
-import Item from  "../components/Item.vue"
+import Task from  "../components/Task.vue";
 import draggable from "vuedraggable";
 import { useBoardStore } from "../store/board";
+import {useTaskStore} from '../store/task';
+import {useUserStore} from '../store/user';
+import { ref, onMounted } from "vue";
 
+const board = useBoardStore()
+const task = useTaskStore();
+const userStore = useUserStore()
+const taskStore = useTaskStore()
 const boardStore = useBoardStore();
-const props = defineProps(["board"]);
+
+const tasks = ref([])
+
+const props = defineProps(["boardFromParent"]);
+
+onMounted(async () =>{
+    try{
+        const res = await task.fetchTasks(props.boardFromParent.id); 
+        tasks.value = res;
+    }catch(error){
+        console.log(error);
+    }
+});
+
 
 async function boardDelete(){
     await boardStore.deleteBoards(task)
@@ -65,7 +85,7 @@ async function boardDelete(){
     border-radius: 6px;
 }
 
-.item-container{
+.task-container{
     box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
 }
 

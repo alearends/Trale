@@ -10,12 +10,17 @@ export const useTaskStore = defineStore("tasks", {
 
   actions: {
     async fetchTasks(boardId) {
-      const { data, error } = await supabase
-        .from("tasks")
-        .select("*")
-        .where({board_id: boardId})
+      try {
+        const { data, error } = await supabase  //data: tasks
+        .from("Tasks")
+        .select()
+        .eq('board_id', boardId)
         .order("id", { ascending: false });
-      this.tasks = tasks;
+      this.tasks = data;
+      } catch(error) {
+        console.log(error)
+      }
+      
     },
     async createTasks(title, is_complete, user_id, board_id) {
       const { data, error } = await supabase.from("tasks").insert([

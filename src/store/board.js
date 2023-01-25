@@ -2,6 +2,13 @@
 
 import { defineStore } from "pinia";
 import { supabase } from "../supabase/supabase";
+import IntoNavBar from "../components/IntoNavBar.vue";
+import Board from "../components/Board.vue";
+import Priority from "../components/Priority.vue";
+import {useTaskStore} from '../store/task';
+import { useUserStore } from "../store/user";
+import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
 
 
 export const useBoardStore = defineStore("Boards", {
@@ -11,22 +18,20 @@ export const useBoardStore = defineStore("Boards", {
 
   actions: {
     async fetchBoards() {
-      // if (!auth.currentUser) {
-      //   throw new Error("Usuario no autenticado");
-      // }
+      const user = JSON.parse(localStorage.getItem('sb-zqkqjcqftuoytgobwdrh-auth-token'))
+      const user_id = user.user.id
       const { data: boards } = await supabase
         .from("Boards")
-        .select("*")
-        .where({user_id: auth.currentUser.id})
+        .select()
+        .eq('user_id', user_id)
         .order("id", { ascending: false });
       this.boards = boards;
+      return boards;
     },
+
     async createBoards(title, user_id, color) {
     try {
-      // if (!auth.currentUser) {
-      //   throw new Error("Usuario no autenticado");
-      // }
-      console.log(title, user_id, color)
+      console.log(title, user_id, color);
       const { data, error } = await supabase.from("Boards").insert([
         {
           title,
@@ -40,6 +45,7 @@ export const useBoardStore = defineStore("Boards", {
       console.log(error)
     }
     },
+
     async deleteBoards(board_id) {
       const { data, error } = await supabase
         .from("Boards")
@@ -48,7 +54,6 @@ export const useBoardStore = defineStore("Boards", {
       return {data, error};
     },
 
-
     async updateTitleBoard(title, board_id) {
       const { data, error } = await supabase
         .from("boards")
@@ -56,6 +61,7 @@ export const useBoardStore = defineStore("Boards", {
         .match({ id: board_id }).catch(e => console.error(e));
       return {data, error};
     },
+
     async updateIsCompleteBoard(is_complete, board_id) {
       const { data, error } = await supabase
         .from("Boards")
@@ -63,6 +69,7 @@ export const useBoardStore = defineStore("Boards", {
         .match({ id: board_id }).catch(e => console.error(e));
       return {data, error};
     },
+
     async updateColorBoard(color, board_id) {
       const { data, error } = await supabase
         .from("Boards")
@@ -70,6 +77,7 @@ export const useBoardStore = defineStore("Boards", {
         .match({ id: board_id }).catch(e => console.error(e));
       return {data, error};
     },
+
     async getBoard(board_id) {
       const { data, error } = await supabase
         .from("Boards")

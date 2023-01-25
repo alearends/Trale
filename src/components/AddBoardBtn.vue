@@ -19,6 +19,8 @@
 import { ref } from "vue";
 import Modal from '../components/Modal.vue';
 
+const emits = defineEmits(["addBoard"]);
+
 data: ()=>({
     showModal
 })
@@ -26,8 +28,9 @@ data: ()=>({
 const showModal = ref(false);
 
 function handleSubmit(data){
-    // console.log("hello it was submit") //esto funciono!!
-    console.log(data)
+    console.log("hizo algo?")
+    emits("addBoard", data);
+    this.showModal = false
 }
 
 

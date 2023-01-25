@@ -1,4 +1,4 @@
-<!-- Freno de emergencia: se acaba de hacer el commit "Board conectado a Supabase" -->
+<!-- Freno de emergencia:  -->
 
 <template>
     <div class="flex justify-center content-center items-center fixed top-0 left-0 h-screen w-screen bg-gray-900/50 modal-content">
@@ -6,7 +6,7 @@
             <p class="title font-bold text-lg text-trale">{{title}}</p>
             <div class="flex flex-col w-full box-border my-4 mx-0">
                 <label class="text-trale font-bold">{{labelA}}</label>
-                <input type="text" v-model="inputA" class="p-1 mb-2 rounded border border-gray-400 w-300">{{ inputA }}
+                <input type="text" v-model="inputA" class="p-1 mb-2 rounded border border-gray-400 w-300">
                 <label class="text-trale font-bold">{{labelB}}</label>
                 <input :type="inputBtype" v-model="inputB" class="p-1 mb-1 rounded border border-gray-400 w-auto"> 
             </div>
@@ -52,7 +52,9 @@ async function getUser() {
 async function submit(){
     // emits("submit", {inputA, inputB});
     const myUser = await getUser()
-    await board.createBoards(inputA.value, myUser.id, inputB.value)
+    await board.createBoards(inputA.value, myUser.id, inputB.value);
+    console.log(inputA.value, myUser.id, inputB.value);
+    emits("close");
 }
 
 

@@ -11,6 +11,19 @@
 </template>
 
 <script setup>
+import { useTaskStore } from "../store/task";
+import { ref } from "vue";
+import { storeToRefs } from "pinia";
+
+const taskStore = useTaskStore();
+const { tasks } = storeToRefs(taskStore);
+
+const title = ref("");
+const is_complete = ref(false);
+const newTitle = ref("");
+const editId = ref(null);
+const completeId = ref(false)
+
 
 </script>
 

@@ -1,7 +1,7 @@
 <template>
-    <div class="item-container rounded py-1 my-2" :style="{backgroundColor: priorityClr}">
+    <div class="task-container rounded py-1 my-2" :style="{backgroundColor: priorityClr}">
         <div class="flex flex-row justify-between items-center mx-2 my-1">
-            <span><i class="fas fa-sort" :style="{color: clr}"></i>{{ item.title }}</span>
+            <span><i class="fas fa-sort" :style="{color: clr}"></i>{{ task.title }}</span>
             <span>
                 <i class="fas fa-check" :style="{color: clr}"></i>
                 <i class="fas fa-trash"></i>
@@ -12,23 +12,12 @@
 
 <script setup>
 import { computed } from "vue";
-const props = defineProps (["item", "clr"]);
 
-
-// PARA PREGUNTAR A IRONHACK
-// const priorityClr = computed(() => {
-//     if(this.item.title == 'low'){
-//         return '#C6F6D5';
-//     }else if(this.item.title == 'medium'){
-//         return '#FEEBC8';
-//     }else if(this.item.title == 'high'){
-//         return '#FECACA';
-//     }else{return '#FFFFFF';}
-// });
-
-
+const props = defineProps (["task", "clr"]);
 
 </script>
+
+
 
 <style scoped>
 .bg-trale {
@@ -54,7 +43,7 @@ const props = defineProps (["item", "clr"]);
     border-radius: 4px;
 }
 
-.item-container{
+.task-container{
     box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
 }
 
@@ -81,3 +70,14 @@ const props = defineProps (["item", "clr"]);
     cursor: pointer;
 }
 </style>
+
+<!-- // PARA PREGUNTAR A IRONHACK
+// const priorityClr = computed(() => {
+//     if(this.task.title == 'low'){
+//         return '#C6F6D5';
+//     }else if(this.task.title == 'medium'){
+//         return '#FEEBC8';
+//     }else if(this.task.title == 'high'){
+//         return '#FECACA';
+//     }else{return '#FFFFFF';}
+// }); -->
