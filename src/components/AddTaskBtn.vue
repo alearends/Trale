@@ -1,35 +1,39 @@
 <template>
     <span>
-        <button
+        <button @click="showModal = true"
+            class="bg-trale text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline duration-200 border-none font-[Nunito]"
+            type="submit"> + Add Task</button>
+        <!-- <button
             @click="showModal = true" class="bg-trale font-bold text-white font-[Nunito] py-1 px-2 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700 hover:border-gray-100 hover:text-gray-100 duration-200 border-solid border-2 border-transparent"
             type="submit"> + add board
-        </button>
-        <Modal 
-        v-if="showModal" 
-        title="Add Board" 
-        labelA="Board Title" 
-        labelB="Board Color" 
-        inputBtype="color"
-        typeModal="board" 
-        @close="showModal = false" 
-        @submit="handleSubmit" />
+        </button> -->
+        <Modal v-if="showModal" 
+        title="Add Task" 
+        labelA="Enter Task" 
+        labelB="Enter Priority" 
+        inputBtype="text" 
+        typeModal="task"
+        :boardId="props.boardId" 
+            @close="showModal = false" @submit="handleSubmit" />
     </span>
 </template>
 
 <script setup>
 import { ref } from "vue";
-import Modal from '../components/Modal.vue';
+import Modal from './Modal.vue';
 
-const emits = defineEmits(["addBoard"]);
+const emits = defineEmits(["addTask"]);
 
-data: ()=>({
+const props = defineProps(["boardId"])
+//  console.log(props.boardId);
+data: () => ({
     showModal
 })
 
 const showModal = ref(false);
 
-function handleSubmit(data){
-    emits("addBoard", data);
+function handleSubmit(data) {
+    emits("addTask", {...data, boardId});
     this.showModal = false;
 }
 

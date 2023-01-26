@@ -1,14 +1,15 @@
 <template>
-    <div class="flex flex-col py-2 bg-white border-gray-300 rounded board-color-trale" :style="{borderColor: boardFromParent.color}">
+    <div class="flex flex-col py-2 bg-white border-gray-300 rounded board-color-trale"
+        :style="{ borderColor: boardFromParent.color }">
         <div class="flex flex-row justify-between items-center mx-2 my-1">
             <span class="font-bold wordmark-color">{{ boardFromParent.title }}</span>
             <span class="flex flex-row items-center">
-                <button
-                    class="bg-trale text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline duration-200 border-none font-[Nunito]">+
-                    Add Task</button>
-                    <button @click="boardDelete" type="button">
-                        <i class="fa-solid fa-ban"></i>
-                    </button>
+                <AddTaskBtn :boardId="props.id" />
+                <!-- <button class="bg-trale text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline duration-200 border-none font-[Nunito]">+
+                    Add Task</button> -->
+                <button @click="boardDelete" type="button">
+                    <i class="fa-solid fa-ban"></i>
+                </button>
             </span>
         </div>
         <h3 class="text-gray-500 text-lg text-center m-4" v-if="tasks.length == 0">No tasks yet!!</h3>
@@ -22,17 +23,19 @@
                     </span>
                 </div>
             </div> -->
-            <Task v-for="(task, index) in tasks" :key="index" :task="task" :clr="board.color" />
+            <Task v-for="(task, index) in boardFromParent.tasks" :key="index" :task="task"
+                :clr="boardFromParent.color" />
         </div>
     </div>
 </template>
 
 <script setup>
-import Task from  "../components/Task.vue";
+import Task from "../components/Task.vue";
+import AddTaskBtn from "./AddTaskBtn.vue";
 import draggable from "vuedraggable";
 import { useBoardStore } from "../store/board";
-import {useTaskStore} from '../store/task';
-import {useUserStore} from '../store/user';
+import { useTaskStore } from '../store/task';
+import { useUserStore } from '../store/user';
 import { ref, onMounted } from "vue";
 
 const board = useBoardStore()
@@ -43,21 +46,24 @@ const boardStore = useBoardStore();
 
 const tasks = ref([])
 
-const props = defineProps(["boardFromParent"]);
+const props = defineProps(["boardFromParent", "id"]);
+console.log(props.id)
 
-onMounted(async () =>{
-    try{
-        const res = await task.fetchTasks(props.boardFromParent.id); 
-        tasks.value = res;
-    }catch(error){
+onMounted(async () => {
+    try {
+        const res = await board.getBoard(props.id);
+        console.log(res)
+        // const res = await task.fetchTasks(props.boardFromParent.id);
+        // tasks.value = res;
+    } catch (error) {
         console.log(error);
     }
 });
 
 
-async function boardDelete(){
+async function boardDelete() {
     await boardStore.deleteBoards(props.boardFromParent.id)
-    }
+}
 
 </script>
 
@@ -80,16 +86,16 @@ async function boardDelete(){
     gap: 1.5em;
 }
 
-.board-color-trale{
+.board-color-trale {
     border-top: 5px solid red;
     border-radius: 6px;
 }
 
-.task-container{
+.task-container {
     box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
 }
 
-.fa-ban{
+.fa-ban {
     color: red;
     margin-left: .75em;
     cursor: pointer;
@@ -101,12 +107,12 @@ async function boardDelete(){
     cursor: pointer;
 }
 
-.fa-sort{
+.fa-sort {
     margin-right: .5em;
     cursor: move;
 }
 
-.fa-check{
+.fa-check {
     color: gray;
     margin-left: .5em;
     cursor: pointer;

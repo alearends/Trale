@@ -26,18 +26,23 @@
 import { ref } from "vue";
 import {useBoardStore} from '../store/board'
 import { useUserStore } from "../store/user";
+import { useTaskStore } from "../store/task";
+import Task from "./Task.vue";
 
 const board = useBoardStore()
+const task = useTaskStore()
 const user = useUserStore()
 
-const props = defineProps(["title", "labelA", "labelB", "inputBtype"]);
+const props = defineProps(["title", "labelA", "labelB", "inputBtype", "typeModal", "boardId"]);
 const emits = defineEmits(["close", "submit", "inputA", "inputB"]);
 const inputA = ref("");
-const inputB = ref("#000");
+const inputB = ref("");
 
 function handleCloseBtnClick(){
     emits("close");
 }
+
+console.log(props.boardId)
 
 // const data = ()=>({
 //     inputA,
@@ -49,14 +54,28 @@ async function getUser() {
     return myUser;
 }
 
+// const theBoard = board.getBoard();
+
+
+
+
+
+//createTasks(title, is_complete, user_id, board_id)
+
 async function submit(){
     // emits("submit", {inputA, inputB});
     const myUser = await getUser()
-    await board.createBoards(inputA.value, myUser.id, inputB.value);
-    console.log(inputA.value, myUser.id, inputB.value);
-    emits("close");
-    refreshPage();
-}
+    if(props.typeModal === "board"){
+        await board.createBoards(inputA.value, myUser.id, inputB.value);
+    } else if(props.typeModal === "task") {
+        console.log(inputA.value, props.boardId);
+        try {await task.createTasks(inputA.value, props.boardId);
+    }catch(error){
+        console.log(error.message)
+    }
+    // emits("close");
+    // refreshPage();
+}}
 
 function refreshPage(){
     location.reload()

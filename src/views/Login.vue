@@ -48,15 +48,15 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import {supabase} from '../supabase/supabase';
 import { useRouter } from 'vue-router';
 import HomeNavBar from '../components/HomeNavBar.vue';
 
 //Create data/vars
 const router = useRouter();
-const email = ref(null);
-const password = ref(null);
+const email = ref("");
+const password = ref("");
 const errorMsg = ref(null);
 
 //Login function
@@ -76,6 +76,17 @@ const signInWithEmail = async () => {
         }, 5000);
     }
 }
+
+//reseteando valores........ Pregunta para IronHack
+// const resetForm = () => {
+//     email.value ="";
+//     password.value ="";
+// }
+
+// onMounted(async () =>{
+//     resetForm()
+// });
+
 
 </script>
 

@@ -22,12 +22,11 @@ export const useTaskStore = defineStore("tasks", {
       }
       
     },
-    async createTasks(title, is_complete, user_id, board_id) {
+    async createTasks(title, board_id) {
       const { data, error } = await supabase.from("tasks").insert([
         {
           title: title,
-          is_complete: is_complete,
-          user_id: user_id,
+          is_complete: false,
           board_id: board_id
         },
       ]);

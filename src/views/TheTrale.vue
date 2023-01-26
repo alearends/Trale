@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div> -->
-            <Board v-for="(board, index) in boards" :key="index" :boardFromParent="board" />
+            <Board v-for="(board, index) in boards" :key="index" :id="board.id" :boardFromParent="board" />
         </div>
     </div>
     <!-- <div class="flex flex-row justify-between items-center rounded px-auto pt-6 pb-8 m-4">
@@ -83,11 +83,12 @@ import { useRouter } from "vue-router";
 
 const board = useBoardStore()
 const task = useTaskStore();
-const userStore = useUserStore()
-const { user } = storeToRefs(userStore)
-const router = useRouter()
+const userStore = useUserStore();
+const { user } = storeToRefs(userStore);
+const router = useRouter();
 
-const boards = ref([])
+const boards = ref([]);
+const tasks = ref([]);
 
 // this.boards.push({
 //     title: data.inputA,
@@ -101,6 +102,9 @@ onMounted(async () =>{
     try{
         const res = await board.fetchBoards(); 
         boards.value = res;
+        // const resp = await task.fetchTasks();
+        // tasks.value = resp;
+        console.log(data)
     }catch(error){
         console.log(error);
     }

@@ -80,9 +80,9 @@ export const useBoardStore = defineStore("Boards", {
 
     async getBoard(board_id) {
       const { data, error } = await supabase
-        .from("Boards")
+        .from("Tasks")
         .select("*")
-        .match({ id: board_id }).catch(e => console.error(e));
+        .eq( "board_id", board_id  );
       return {data, error};
     }
   },

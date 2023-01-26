@@ -98,7 +98,16 @@ const register = async () => {
     }, 5000);
 };
 
-// return { email, password, verifyPassword, errorMsg, register };
+
+//reseteando valores........ Pregunta para IronHack
+// const resetForm = () => {
+//     email.value ="";
+//     password.value ="";
+// }
+
+// onMounted(async () =>{
+//     resetForm()
+// });
 
 </script>
 
