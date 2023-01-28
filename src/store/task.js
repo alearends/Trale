@@ -15,7 +15,7 @@ export const useTaskStore = defineStore("Tasks", {
         .from("Tasks")
         .select()
         .eq('board_id', boardId)
-        .order("id", { ascending: false });
+        .order("task_id", { ascending: false });
       this.tasks = tasks;
       return tasks;
       } catch(error) {
@@ -35,7 +35,8 @@ export const useTaskStore = defineStore("Tasks", {
         console.log(error);
       } else {
         this.tasks.push(taskCreated[0]);
-      }
+      };
+      refreshPage();
     },
 
     // async removeTasks(board_id, task_id) {
@@ -46,15 +47,15 @@ export const useTaskStore = defineStore("Tasks", {
     //     .eq('id', task_id);
     // },
 
-    async deleteTask(taskId) {
+    async deleteTask(task_id) {
       const { data, error } = await supabase
         .from("Tasks")
         .delete()
-        .match({ id: taskId });
+        .match({ id: task_id });
       if (error) {
         console.log(error);
       } else {
-        this.tasks = this.tasks.filter((task) => task.id !== taskId);
+        this.tasks = this.tasks.filter((task) => task.id !== task_id);
       }
     },
 
@@ -80,3 +81,7 @@ export const useTaskStore = defineStore("Tasks", {
     
   },
 });
+
+function refreshPage(){
+  location.reload()
+}

@@ -4,7 +4,7 @@
             <span><i class="fas fa-sort" :style="{color: clr}"></i>{{ task }}</span>
             <span>
                 <i class="fas fa-check" :style="{color: clr}"></i>
-                <i class="fas fa-trash" @click="deleteTask(task.id)"></i>
+                <i class="fas fa-trash" @click="deleteTask(task_id)"></i>
             </span>
         </div>
     </div>
@@ -25,12 +25,12 @@ const emits = defineEmits(['refresh'])
 
 const handleTaskDelete = async() => {
     // await taskk.removeTasks(props.id, task_id);
-    await taskk.deleteTask(taskk.id);
+    await taskk.deleteTask(task_id);
     emits('refresh');
 };
 
-const deleteTask = (taskId) => {
-    taskk.deleteTask(taskId);
+const deleteTask = (task_id) => {
+    taskk.deleteTask(task_id);
 }
 
 </script>

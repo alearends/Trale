@@ -22,8 +22,9 @@
                         <i class="fas fa-trash"></i>
                     </span>
                 </div>
+                freno: funciona todo bien
             </div> -->
-            <Task v-for="(task, index) in tasks" :key="index" :task="task.title" :boardId="id" :taskId="index"
+            <Task v-for="(task, task_id) in tasks" :key="task_id" :task="task.title" :boardId="id" :taskId="task_id"
                 :clr="boardFromParent.color" @refresh="getAllTasks" />
         </div>
     </div>
@@ -46,8 +47,7 @@ const boardStore = useBoardStore();
 
 const tasks = ref([]);
 
-const props = defineProps(["boardFromParent", "id", "index"]);
-// console.log("idex es:"+index)
+const props = defineProps(["boardFromParent", "id", "task_id"]);
 console.log(props.id)
 
 // board_id = props.id
@@ -77,8 +77,13 @@ const emits = defineEmits(['refresh'])
 
 const handleBoardDelete = async () => {
     await board.deleteBoards(props.id);
-    emits('refresh')
+    // emits('refresh');
+    refreshPage();
 };
+
+function refreshPage(){
+    location.reload()
+}
 
 // EventBus.$on("deleteBoard", (boardId) =>{
 //     this.boards.splice(boardId, 1)

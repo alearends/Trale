@@ -70,7 +70,7 @@ async function submit(){
         refreshPage();
     }catch(error){
         console.log(error.message)
-    }
+    };
 
 }}
 
