@@ -87,7 +87,6 @@ const signInWithEmail = async () => {
 //     resetForm()
 // });
 
-
 </script>
 
 <style scoped>
@@ -106,4 +105,5 @@ const signInWithEmail = async () => {
 .bg-nav {
     background-color: #E5E7EB;
 }
+
 </style>

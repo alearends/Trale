@@ -14,29 +14,28 @@
         inputBtype="text" 
         typeModal="task"
         :boardId="props.boardId" 
-            @close="showModal = false" @submit="handleSubmit" />
+        @close="showModal = false" 
+        @submit="handleSubmit" />
     </span>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import Modal from './Modal.vue';
-
 const emits = defineEmits(["addTask"]);
-
 const props = defineProps(["boardId"])
+
 //  console.log(props.boardId);
+
 data: () => ({
     showModal
 })
 
 const showModal = ref(false);
-
 function handleSubmit(data) {
     emits("addTask", {...data, boardId});
     this.showModal = false;
 }
-
 
 // function handleSubmit(showModal){
 //     this.showModal = false;
@@ -48,28 +47,22 @@ function handleSubmit(data) {
 .bg-nav {
     background-color: #E5E7EB;
 }
-
 .text-nav {
     color: #E5E7EB;
 }
-
 .wordmark-color {
     color: #2A4657;
 }
-
 .dropbtn {
     border: none;
     background: none;
 }
-
 .bg-trale {
     background-color: #0067A3;
 }
-
 .text-trale {
     color: #0067A3
 }
-
 .bg-wordmark-color {
     background-color: #2A4657;
 }

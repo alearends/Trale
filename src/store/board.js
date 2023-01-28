@@ -50,15 +50,16 @@ export const useBoardStore = defineStore("Boards", {
       const { data, error } = await supabase
         .from("Boards")
         .delete()
-        .match({ id: board_id }).catch(e => console.error(e));
+        .eq( {id: board_id}  )
+      //   .catch(e => console.error(e));
       return {data, error};
     },
 
     async updateTitleBoard(title, board_id) {
       const { data, error } = await supabase
-        .from("boards")
+        .from("Boards")
         .update({ title: title })
-        .match({ id: board_id }).catch(e => console.error(e));
+        .match({ id: board_id}).catch(e => console.error(e));
       return {data, error};
     },
 
@@ -66,7 +67,7 @@ export const useBoardStore = defineStore("Boards", {
       const { data, error } = await supabase
         .from("Boards")
         .update({ is_complete: is_complete })
-        .match({ id: board_id }).catch(e => console.error(e));
+        .match({ id: board_id}).catch(e => console.error(e));
       return {data, error};
     },
 
@@ -87,5 +88,6 @@ export const useBoardStore = defineStore("Boards", {
     }
   },
 });
+
 
 

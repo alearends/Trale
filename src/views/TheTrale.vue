@@ -93,12 +93,12 @@ const tasks = ref([]);
 // this.boards.push({
 //     title: data.inputA,
 //     color: data.inputB || "#000",
-//     id_board: "",
+//     board_id: "",
 //     tasks: [],
 // })
 
 onMounted(async () =>{
-    console.log("esto esta Montado");
+    console.log("este Board esta Montado");
     try{
         const res = await board.fetchBoards(); 
         boards.value = res;
@@ -110,12 +110,31 @@ onMounted(async () =>{
     }
 });
 
+onMounted(async () =>{
+    console.log("esta task esta Montada");
+    try{
+        const resp = await task.fetchTasks(); 
+        tasks.value = resp;
+        // const resp = await task.fetchTasks();
+        // tasks.value = resp;
+        console.log(data)
+    }catch(error){
+        console.log(error);
+    }
+});
+
+// EventBus.$on("deleteBoard", (boardId) =>{
+//     this.boards.splice(boardId, 1)
+// })
+
+// EventBus.$on("deleteTask", (data) =>{
+//     this.boards.[data.boardId].items.splice(data.itemId, 1)
+// })
+
 // this.tasks.push({
 //     title: title.task,
 //     taskId: id_task,
 // })
-
-
 
 
 
@@ -219,4 +238,5 @@ onMounted(async () =>{
     margin-left: .5em;
     cursor: pointer;
 }
+
 </style>

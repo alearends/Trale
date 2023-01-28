@@ -74,7 +74,6 @@ const verifyPassword = ref(null);
 const errorMsg = ref(null);
 
 //Register function
-
 const register = async () => {
     if (password.value === verifyPassword.value) {
         try {
@@ -98,13 +97,11 @@ const register = async () => {
     }, 5000);
 };
 
-
 //reseteando valores........ Pregunta para IronHack
 // const resetForm = () => {
 //     email.value ="";
 //     password.value ="";
 // }
-
 // onMounted(async () =>{
 //     resetForm()
 // });
@@ -123,10 +120,8 @@ const register = async () => {
 .wordmark-color {
     color: #2A4657;
 }
-
 .bg-nav {
     background-color: #E5E7EB;
 }
+
 </style>
-
-

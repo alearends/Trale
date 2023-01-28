@@ -4,16 +4,27 @@
             <span><i class="fas fa-sort" :style="{color: clr}"></i>{{ task.title }}</span>
             <span>
                 <i class="fas fa-check" :style="{color: clr}"></i>
-                <i class="fas fa-trash"></i>
+                <i class="fas fa-trash" @click="handleTaskDelete"></i>
             </span>
         </div>
     </div>
 </template>
 
 <script setup>
-import { computed } from "vue";
+import { useBoardStore } from "../store/board";
+import { useTaskStore } from '../store/task';
 
-const props = defineProps (["task", "clr"]);
+const board = useBoardStore();
+const taskk = useTaskStore();
+
+// board_id = props.id
+
+const props = defineProps (["task", "clr", "boardId", "taskId"]);
+
+const handleTaskDelete = async(task) => {
+    await taskk.deleteTasks(props.id, task_id);
+    await taskk.fetchTasks(boardId);
+};
 
 </script>
 

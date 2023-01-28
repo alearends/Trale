@@ -41,8 +41,7 @@ const inputB = ref("");
 function handleCloseBtnClick(){
     emits("close");
 }
-
-console.log(props.boardId)
+console.log(props.boardId);
 
 // const data = ()=>({
 //     inputA,
@@ -58,8 +57,6 @@ async function getUser() {
 
 
 
-
-
 //createTasks(title, is_complete, user_id, board_id)
 
 async function submit(){
@@ -67,21 +64,22 @@ async function submit(){
     const myUser = await getUser()
     if(props.typeModal === "board"){
         await board.createBoards(inputA.value, myUser.id, inputB.value);
+        emits("close");
+        refreshPage();
     } else if(props.typeModal === "task") {
         console.log(inputA.value, props.boardId);
         try {await task.createTasks(inputA.value, props.boardId);
+        emits("close");
+        // refreshPage();
     }catch(error){
         console.log(error.message)
     }
-    // emits("close");
-    // refreshPage();
+
 }}
 
 function refreshPage(){
     location.reload()
 }
-
-
 
 </script>
 
@@ -89,21 +87,16 @@ function refreshPage(){
 .modal-content{
     backdrop-filter: blur(5px);
 }
-
 .bg-trale {
     background-color: #0067A3;
 }
-
 .text-trale{
     color: #0067A3
 }
-
 .bg-wordmark-color {
     background-color: #2A4657;
 }
-
 input[type="color"]{
     padding: .1em .5em;
 }
-
 </style>

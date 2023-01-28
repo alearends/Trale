@@ -7,8 +7,8 @@
                 <AddTaskBtn :boardId="props.id" />
                 <!-- <button class="bg-trale text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline duration-200 border-none font-[Nunito]">+
                     Add Task</button> -->
-                <button @click="boardDelete" type="button">
-                    <i class="fa-solid fa-ban"></i>
+                <button type="button">
+                    <i class="fa-solid fa-ban" @click="handleBoardDelete (props.id)"></i>
                 </button>
             </span>
         </div>
@@ -23,7 +23,7 @@
                     </span>
                 </div>
             </div> -->
-            <Task v-for="(task, index) in boardFromParent.tasks" :key="index" :task="task"
+            <Task v-for="(task, index) in boardFromParent.tasks" :key="index" :task="task" :boardId="id" :taskId="index"
                 :clr="boardFromParent.color" />
         </div>
     </div>
@@ -38,32 +38,42 @@ import { useTaskStore } from '../store/task';
 import { useUserStore } from '../store/user';
 import { ref, onMounted } from "vue";
 
-const board = useBoardStore()
-const task = useTaskStore();
-const userStore = useUserStore()
-const taskStore = useTaskStore()
+const board = useBoardStore();
+const taskk = useTaskStore();
+const userStore = useUserStore();
+const taskStore = useTaskStore();
 const boardStore = useBoardStore();
 
-const tasks = ref([])
+const tasks = ref([]);
 
 const props = defineProps(["boardFromParent", "id"]);
 console.log(props.id)
 
+// board_id = props.id
+
 onMounted(async () => {
     try {
         const res = await board.getBoard(props.id);
-        console.log(res)
-        // const res = await task.fetchTasks(props.boardFromParent.id);
+        // const res = await board.fetchTasks(props.boardFromParent.id);
         // tasks.value = res;
+        console.log(res)
     } catch (error) {
         console.log(error);
     }
 });
 
 
-async function boardDelete() {
-    await boardStore.deleteBoards(props.boardFromParent.id)
-}
+
+const handleBoardDelete = async () => {
+    await board.deleteBoards(props.id);
+    await board.fetchBoards();
+};
+
+// EventBus.$on("deleteBoard", (boardId) =>{
+//     this.boards.splice(boardId, 1)
+// })
+
+
 
 </script>
 
@@ -71,47 +81,38 @@ async function boardDelete() {
 .bg-trale {
     background-color: #0067A3;
 }
-
 .text-bg-nav {
     color: #E5E7EB;
 }
-
 .border-bg-trale {
     border-color: #0067A3;
 }
-
 .board-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1.5em;
 }
-
 .board-color-trale {
     border-top: 5px solid red;
     border-radius: 6px;
 }
-
 .task-container {
     box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
 }
-
 .fa-ban {
     color: red;
     margin-left: .75em;
     cursor: pointer;
 }
-
 .fa-trash {
     color: gray;
     margin-left: .75em;
     cursor: pointer;
 }
-
 .fa-sort {
     margin-right: .5em;
     cursor: move;
 }
-
 .fa-check {
     color: gray;
     margin-left: .5em;

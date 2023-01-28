@@ -7,6 +7,7 @@ export const useUserStore = defineStore("user", {
   state: () => ({
     user: null,
   }),
+
   actions: {
     async fetchUser() {
       const { data: { user } } = await supabase.auth.getUser();
@@ -15,6 +16,7 @@ export const useUserStore = defineStore("user", {
         return user;
       }
     },
+
     // Hacer sign up (register) - Create a new user
     async signUp(email, password) {
       const { data, error,} = await supabase.auth.signUp({
@@ -22,6 +24,7 @@ export const useUserStore = defineStore("user", {
         password: password,
       });
     },
+
     // Hacer sign in (login) with email and password
     async signIn(email, password) {
       const {data: {user}, error} = await supabase.auth.signInWithPassword({
@@ -31,6 +34,7 @@ export const useUserStore = defineStore("user", {
     if (error) throw error;
     if (user) this.user = user;
     },
+
     // Hacer sign in (login) with phone and password
     async signInWithPhone(phone, password){
       const { data, error } = await supabase.auth.signInWithPassword({
@@ -38,6 +42,7 @@ export const useUserStore = defineStore("user", {
         password: password,
       })
     },
+
     // After receiving a SMS with a OTP.
     async signInWithPhoneAfter(phone, password){
         const { data, error } = await supabase.auth.verifyOtp({
@@ -45,12 +50,14 @@ export const useUserStore = defineStore("user", {
         token: token,
       })
     },
+
     //Sign in with a third-party provider
     async signThirdProvider(provider){
       const { data, error } = await supabase.auth.signInWithOAuth({
       provider: provider
       })
     },
+    
     // Hacer log out
     async signOut(){
       const { error } = await supabase.auth.signOut()
