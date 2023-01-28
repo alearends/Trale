@@ -48,14 +48,18 @@ export const useTaskStore = defineStore("Tasks", {
     // },
 
     async deleteTask(task_id) {
+      if (!task_id) {
+        console.log("Task ID is not provided");
+        return;
+    }
       const { data, error } = await supabase
         .from("Tasks")
         .delete()
-        .match({ id: task_id });
+        .eq('task_id', task_id);
       if (error) {
         console.log(error);
       } else {
-        this.tasks = this.tasks.filter((task) => task.id !== task_id);
+        this.tasks = this.tasks.filter((task) => task_id !== task_id);
       }
     },
 

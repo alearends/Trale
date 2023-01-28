@@ -4,7 +4,7 @@
             <span><i class="fas fa-sort" :style="{color: clr}"></i>{{ task }}</span>
             <span>
                 <i class="fas fa-check" :style="{color: clr}"></i>
-                <i class="fas fa-trash" @click="deleteTask(task_id)"></i>
+                <i class="fas fa-trash" @click="handleTaskDelete(task_id)"></i>
             </span>
         </div>
     </div>
@@ -12,26 +12,37 @@
 
 <script setup>
 import { useBoardStore } from "../store/board";
-import { useTaskStore } from '../store/task';
+import { useTaskStore } from "../store/task";
 
 const board = useBoardStore();
-const taskk = useTaskStore();
+// const taskk = useTaskStore();
+const taskStore = useTaskStore();
 
 // board_id = props.id
 
-const props = defineProps (["task", "clr", "boardId"]);
+const props = defineProps (["task", "clr", "boardId", "taskId"]);
 
 const emits = defineEmits(['refresh'])
 
-const handleTaskDelete = async() => {
-    // await taskk.removeTasks(props.id, task_id);
-    await taskk.deleteTask(task_id);
-    emits('refresh');
-};
+// const deleteTask = (taskId) => {
+//     taskStore.deleteTask(taskId);
+//     emits('refresh');
+// };
 
-const deleteTask = (task_id) => {
-    taskk.deleteTask(task_id);
+const handleTaskDelete = async(task_id) => {
+    await taskStore.deleteTask(task_id);
+    emits('refresh');
 }
+
+// const handleTaskDelete = async() => {
+//     // await taskStore.removeTasks(props.id, task_id);
+//     await taskStore.deleteTask(task_id);
+//     emits('refresh');
+// };
+
+// const deleteTask = (task_id) => {
+//     taskStore.deleteTask(task_id);
+// }
 
 </script>
 

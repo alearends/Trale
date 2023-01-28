@@ -26,6 +26,8 @@
             </div> -->
             <Task v-for="(task, task_id) in tasks" :key="task_id" :task="task.title" :boardId="id" :taskId="task_id"
                 :clr="boardFromParent.color" @refresh="getAllTasks" />
+            <!-- <Task v-for="(task, task_id) in tasks" :key="task_id" :task="task.title" :boardId="id" :taskId="task_id"
+                :clr="boardFromParent.color" @refresh="getAllTasks" /> -->
         </div>
     </div>
 </template>
@@ -35,12 +37,12 @@ import Task from "../components/Task.vue";
 import AddTaskBtn from "./AddTaskBtn.vue";
 import draggable from "vuedraggable";
 import { useBoardStore } from "../store/board";
-import { useTaskStore } from '../store/task';
-import { useUserStore } from '../store/user';
+import { useTaskStore } from "../store/task";
+import { useUserStore } from "../store/user";
 import { ref, onMounted } from "vue";
 
 const board = useBoardStore();
-const taskk = useTaskStore();
+// const taskk = useTaskStore();
 const userStore = useUserStore();
 const taskStore = useTaskStore();
 const boardStore = useBoardStore();
@@ -54,7 +56,7 @@ console.log(props.id)
 
 async function getAllTasks(){
     const res = await board.getBoard(props.id);
-        const tasksRes = await taskk.fetchTasks(props.boardFromParent.id);
+        const tasksRes = await taskStore.fetchTasks(props.boardFromParent.id);
         if(tasksRes) {
             tasks.value = tasksRes;
             console.log(tasks.value)
