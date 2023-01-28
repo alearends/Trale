@@ -23,7 +23,7 @@
                     </span>
                 </div>
             </div> -->
-            <Task v-for="(task, index) in boardFromParent.tasks" :key="index" :task="task" :boardId="id" :taskId="index"
+            <Task v-for="(task, index) in tasks" :key="index" :task="task.title" :boardId="id" :taskId="index"
                 :clr="boardFromParent.color" />
         </div>
     </div>
@@ -54,19 +54,24 @@ console.log(props.id)
 onMounted(async () => {
     try {
         const res = await board.getBoard(props.id);
-        // const res = await board.fetchTasks(props.boardFromParent.id);
+        const tasksRes = await taskk.fetchTasks(props.boardFromParent.id);
+        console.log(tasksRes)
+        if(tasksRes) {
+            tasks.value = tasksRes;
+            console.log(tasks.value)
+        }
+       // tasksRes.data ? tasks.value = tasksRes.data : ''
         // tasks.value = res;
-        console.log(res)
     } catch (error) {
         console.log(error);
     }
 });
 
-
+const emits = defineEmits(['refresh'])
 
 const handleBoardDelete = async () => {
     await board.deleteBoards(props.id);
-    await board.fetchBoards();
+    emits('refresh')
 };
 
 // EventBus.$on("deleteBoard", (boardId) =>{

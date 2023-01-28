@@ -17,6 +17,7 @@ export const useTaskStore = defineStore("Tasks", {
         .eq('board_id', boardId)
         .order("id", { ascending: false });
       this.tasks = tasks;
+      return tasks;
       } catch(error) {
         console.log(error)
       }

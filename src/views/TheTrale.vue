@@ -28,7 +28,7 @@
                     </div>
                 </div>
             </div> -->
-            <Board v-for="(board, index) in boards" :key="index" :id="board.id" :boardFromParent="board" />
+            <Board v-for="(board, index) in boards" :key="index" :id="board.id" :boardFromParent="board" @refresh="getAllBoards" />
         </div>
     </div>
     <!-- <div class="flex flex-row justify-between items-center rounded px-auto pt-6 pb-8 m-4">
@@ -97,11 +97,16 @@ const tasks = ref([]);
 //     tasks: [],
 // })
 
+async function getAllBoards() {
+    const res = await board.fetchBoards(); 
+        boards.value = res;
+}
+
+
 onMounted(async () =>{
     console.log("este Board esta Montado");
     try{
-        const res = await board.fetchBoards(); 
-        boards.value = res;
+        await getAllBoards()
         // const resp = await task.fetchTasks();
         // tasks.value = resp;
         console.log(data)

@@ -1,7 +1,7 @@
 <template>
     <div class="task-container rounded py-1 my-2" :style="{backgroundColor: priorityClr}">
         <div class="flex flex-row justify-between items-center mx-2 my-1">
-            <span><i class="fas fa-sort" :style="{color: clr}"></i>{{ task.title }}</span>
+            <span><i class="fas fa-sort" :style="{color: clr}"></i>{{ task }}</span>
             <span>
                 <i class="fas fa-check" :style="{color: clr}"></i>
                 <i class="fas fa-trash" @click="handleTaskDelete"></i>
@@ -25,6 +25,7 @@ const handleTaskDelete = async(task) => {
     await taskk.deleteTasks(props.id, task_id);
     await taskk.fetchTasks(boardId);
 };
+
 
 </script>
 

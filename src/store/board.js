@@ -47,10 +47,11 @@ export const useBoardStore = defineStore("Boards", {
     },
 
     async deleteBoards(board_id) {
+      console.log(board_id)
       const { data, error } = await supabase
         .from("Boards")
         .delete()
-        .eq( {id: board_id}  )
+        .eq('id', board_id)
       //   .catch(e => console.error(e));
       return {data, error};
     },
