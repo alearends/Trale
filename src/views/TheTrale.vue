@@ -102,7 +102,6 @@ async function getAllBoards() {
         boards.value = res;
 }
 
-
 onMounted(async () =>{
     console.log("este Board esta Montado");
     try{
@@ -115,82 +114,27 @@ onMounted(async () =>{
     }
 });
 
-onMounted(async () =>{
-    console.log("esta task esta Montada");
-    try{
-        const resp = await task.fetchTasks(); 
-        tasks.value = resp;
-        // const resp = await task.fetchTasks();
-        // tasks.value = resp;
-        console.log(data)
-    }catch(error){
-        console.log(error);
-    }
-});
+// async function getAllTasks(){
+//     const resp = await task.fetchTasks(); 
+//         tasks.value = resp;
+// }
 
-// EventBus.$on("deleteBoard", (boardId) =>{
-//     this.boards.splice(boardId, 1)
-// })
-
-// EventBus.$on("deleteTask", (data) =>{
-//     this.boards.[data.boardId].items.splice(data.itemId, 1)
-// })
-
-// this.tasks.push({
-//     title: title.task,
-//     taskId: id_task,
-// })
-
-
-
-
-
-
-
-
-
-// export default {
-//     name: 'App',
-//     display: "App",
-//     order: 1,
-//     components: {
-//     draggable,
-//     IntoNavBar,
-// },
-//     data() {
-//         return {
-//             arrSprintBacklog: [
-//                 { name: "an agile task", id: 3 },
-//                 { name: "another agile task", id: 4 },
-//                 { name: "another agile task", id: 5 },
-//             ],
-//             arrDesingProcess: [
-//                 { name: "a design task", id: 1 },
-//                 { name: "another design task", id: 2 },
-//             ],
-//             arrDesingEnd: [
-//                 { name: "a design end", id: 1 },
-//                 { name: "another design end", id: 2 },
-//             ],
-//         };
-//     },
-//     methods: {
-//         add: function () {
-//             this.list.push({ name: "a design task" });
-//         },
-//         replace: function () {
-//             this.list = [{ name: "another design task" }];
-//         },
-//         clone: function (el) {
-//             return {
-//                 name: el.name + " cloned"
-//             };
-//         },
-//         log: function (evt) {
-//             window.console.log(evt);
-//         }
+// onMounted(async () =>{
+//     console.log("esta task esta Montada");
+//     try{
+//         await getAllTasks()
+//         // const resp = await task.fetchTasks();
+//         // tasks.value = resp;
+//         console.log(data)
+//     }catch(error){
+//         console.log(error);
 //     }
-// };
+// });
+
+
+
+
+
 </script>
     
 <style scoped>

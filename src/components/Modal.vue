@@ -36,7 +36,7 @@ const user = useUserStore()
 const props = defineProps(["title", "labelA", "labelB", "inputBtype", "typeModal", "boardId"]);
 const emits = defineEmits(["close", "submit", "inputA", "inputB"]);
 const inputA = ref("");
-const inputB = ref("");
+const inputB = ref('#000');
 
 function handleCloseBtnClick(){
     emits("close");
@@ -53,9 +53,6 @@ async function getUser() {
     return myUser;
 }
 
-// const theBoard = board.getBoard();
-
-
 
 //createTasks(title, is_complete, user_id, board_id)
 
@@ -70,7 +67,7 @@ async function submit(){
         console.log(inputA.value, props.boardId);
         try {await task.createTasks(inputA.value, props.boardId);
         emits("close");
-        // refreshPage();
+        refreshPage();
     }catch(error){
         console.log(error.message)
     }

@@ -38,12 +38,24 @@ export const useTaskStore = defineStore("Tasks", {
       }
     },
 
-    async deleteTasks(board_id, task_id) {
+    // async removeTasks(board_id, task_id) {
+    //   const { data, error } = await supabase
+    //     .from("Tasks")
+    //     .delete()
+    //     .where({ board_id: board_id })
+    //     .eq('id', task_id);
+    // },
+
+    async deleteTask(taskId) {
       const { data, error } = await supabase
         .from("Tasks")
         .delete()
-        .where({ id_board: board_id })
-        .match({ id: task_id });
+        .match({ id: taskId });
+      if (error) {
+        console.log(error);
+      } else {
+        this.tasks = this.tasks.filter((task) => task.id !== taskId);
+      }
     },
 
     async updateTitleTask(title, task_id, board_id) {

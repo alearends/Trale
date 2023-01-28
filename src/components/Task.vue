@@ -1,10 +1,10 @@
 <template>
-    <div class="task-container rounded py-1 my-2" :style="{backgroundColor: priorityClr}">
+    <div class="task-container rounded py-1 my-2" >
         <div class="flex flex-row justify-between items-center mx-2 my-1">
             <span><i class="fas fa-sort" :style="{color: clr}"></i>{{ task }}</span>
             <span>
                 <i class="fas fa-check" :style="{color: clr}"></i>
-                <i class="fas fa-trash" @click="handleTaskDelete"></i>
+                <i class="fas fa-trash" @click="deleteTask(task.id)"></i>
             </span>
         </div>
     </div>
@@ -19,13 +19,19 @@ const taskk = useTaskStore();
 
 // board_id = props.id
 
-const props = defineProps (["task", "clr", "boardId", "taskId"]);
+const props = defineProps (["task", "clr", "boardId"]);
 
-const handleTaskDelete = async(task) => {
-    await taskk.deleteTasks(props.id, task_id);
-    await taskk.fetchTasks(boardId);
+const emits = defineEmits(['refresh'])
+
+const handleTaskDelete = async() => {
+    // await taskk.removeTasks(props.id, task_id);
+    await taskk.deleteTask(taskk.id);
+    emits('refresh');
 };
 
+const deleteTask = (taskId) => {
+    taskk.deleteTask(taskId);
+}
 
 </script>
 
@@ -83,13 +89,3 @@ const handleTaskDelete = async(task) => {
 }
 </style>
 
-<!-- // PARA PREGUNTAR A IRONHACK
-// const priorityClr = computed(() => {
-//     if(this.task.title == 'low'){
-//         return '#C6F6D5';
-//     }else if(this.task.title == 'medium'){
-//         return '#FEEBC8';
-//     }else if(this.task.title == 'high'){
-//         return '#FECACA';
-//     }else{return '#FFFFFF';}
-// }); -->

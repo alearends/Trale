@@ -24,7 +24,7 @@
                 </div>
             </div> -->
             <Task v-for="(task, index) in tasks" :key="index" :task="task.title" :boardId="id" :taskId="index"
-                :clr="boardFromParent.color" />
+                :clr="boardFromParent.color" @refresh="getAllTasks" />
         </div>
     </div>
 </template>
@@ -46,20 +46,26 @@ const boardStore = useBoardStore();
 
 const tasks = ref([]);
 
-const props = defineProps(["boardFromParent", "id"]);
+const props = defineProps(["boardFromParent", "id", "index"]);
+// console.log("idex es:"+index)
 console.log(props.id)
 
 // board_id = props.id
 
-onMounted(async () => {
-    try {
-        const res = await board.getBoard(props.id);
+async function getAllTasks(){
+    const res = await board.getBoard(props.id);
         const tasksRes = await taskk.fetchTasks(props.boardFromParent.id);
-        console.log(tasksRes)
         if(tasksRes) {
             tasks.value = tasksRes;
             console.log(tasks.value)
         }
+        console.log(tasksRes)
+}
+
+onMounted(async () => {
+    try {
+        console.log("esta tarea esta Montada!")
+        await getAllTasks()
        // tasksRes.data ? tasks.value = tasksRes.data : ''
         // tasks.value = res;
     } catch (error) {

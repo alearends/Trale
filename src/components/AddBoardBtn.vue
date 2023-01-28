@@ -7,7 +7,7 @@
         <Modal v-if="showModal" 
         title="Add Board" 
         labelA="Board Title" 
-        labelB="Board Color" 
+        labelB="Board Color"
         inputBtype="color"
         typeModal="board" 
         @close="showModal = false" 
