@@ -4,7 +4,7 @@
             <span><i class="fas fa-sort" :style="{color: clr}"></i>{{ task }}</span>
             <span>
                 <i class="fas fa-check" :style="{color: clr}"></i>
-                <i class="fas fa-trash" @click="handleTaskDelete(task_id)"></i>
+                <i class="fas fa-trash" @click="getTaskId(task.id, $event)"></i>
             </span>
         </div>
     </div>
@@ -15,24 +15,47 @@ import { useBoardStore } from "../store/board";
 import { useTaskStore } from "../store/task";
 
 const board = useBoardStore();
-// const taskk = useTaskStore();
 const taskStore = useTaskStore();
+// const taskk = useTaskStore();
 
 // board_id = props.id
 
 const props = defineProps (["task", "clr", "boardId", "taskId"]);
 
-const emits = defineEmits(['refresh'])
+function getTaskId (event) {
+  const taskId = event.target.taskId;
+  console.log(getTaskId);
+}
+
+
+// const emits = defineEmits(['refresh']);
 
 // const deleteTask = (taskId) => {
 //     taskStore.deleteTask(taskId);
 //     emits('refresh');
 // };
 
-const handleTaskDelete = async(task_id) => {
-    await taskStore.deleteTask(task_id);
-    emits('refresh');
-}
+// const handleTaskDelete = async(taskId) => {
+//     await taskStore.deleteTask(props.taskId);
+// }
+
+// const handleTaskDelete = async() => {
+//   await deleteTask(this.task.task_id);
+// }
+
+
+// const handleTaskDelete = async($event) => {
+//     const taskId = await taskStore.getTaskId($event);
+//     await taskStore.deleteTask(props.taskId);
+// }
+
+// const handleTaskDelete = async(task) => {
+//     const task_id = await taskStore.getTaskId(task.title);
+//     await taskStore.deleteTask(task_id);
+// }
+
+// const { rows } = await supabase.from('tasks').select('id').where({ task_name: 'My Task' });
+// const taskId = rows[0].id;
 
 // const handleTaskDelete = async() => {
 //     // await taskStore.removeTasks(props.id, task_id);
