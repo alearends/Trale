@@ -84,7 +84,6 @@ const register = async () => {
             const { error } = await userStore.signUp(email.value, password.value);
             if (error) throw error;
             router.push({ name: "Login" });
-            // console.log("los 2 passwords son iguales");
         } catch (error) {
             errorMsg.value = error.message;
         }
@@ -95,33 +94,6 @@ const register = async () => {
     }, 5000);
 }
 
-//Register function (original)
-
-// const register = async () => {
-//     if(password.value === verifyPassword.value){
-//         try{
-//             const {error} = await supabase.auth.signUp({
-//                 email: email.value,
-//                 password: password.value,
-//             });
-//             if (error) throw error;
-//             router.push({name: "Login"});
-//         } catch (error) {
-//             errorMsg.value = error.message;
-//         }
-//     }
-//     errorMsg.value = "Error: Passwords do not match";
-//     setTimeout(() => {
-//         errorMsg.value = null;
-//     }, 5000);
-// };
-
-// const validateForm = () => {
-//             if (this.password !== this.verifyPassword) {
-//                 return false;
-//             }
-//             return true;
-//         };
 
 </script>
 

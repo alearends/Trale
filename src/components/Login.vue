@@ -63,13 +63,7 @@ const userStore = useUserStore()
 //Login function
 const login = async () => {
     try {
-        //Podemos llamar a la store 
         userStore.sigIn(email.value, password.value)
-        // const {error} = await supabase.auth.signInWithPassword({
-        //     email: email.value,
-        //     password: password.value,
-        // });
-        // if (error) throw error;
         router.push({name: "Home"});
     }
     catch(error){

@@ -44,7 +44,6 @@ import { useUserStore } from "../store/user";
 import { ref, onMounted } from "vue";
 
 const board = useBoardStore();
-// const taskk = useTaskStore();
 const userStore = useUserStore();
 const taskStore = useTaskStore();
 const boardStore = useBoardStore();
@@ -53,8 +52,6 @@ const tasks = ref([]);
 
 const props = defineProps(["boardFromParent", "id", "task_id"]);
 console.log(props.id)
-
-// board_id = props.id
 
 async function getAllTasks(){
     const res = await board.getBoard(props.id);
@@ -70,8 +67,6 @@ onMounted(async () => {
     try {
         console.log("esta tarea esta Montada!")
         await getAllTasks()
-       // tasksRes.data ? tasks.value = tasksRes.data : ''
-        // tasks.value = res;
     } catch (error) {
         console.log(error);
     }
@@ -81,19 +76,12 @@ const emits = defineEmits(['refresh'])
 
 const handleBoardDelete = async () => {
     await board.deleteBoards(props.id);
-    // emits('refresh');
     refreshPage();
 };
 
 function refreshPage(){
     location.reload()
 }
-
-// EventBus.$on("deleteBoard", (boardId) =>{
-//     this.boards.splice(boardId, 1)
-// })
-
-
 
 </script>
 

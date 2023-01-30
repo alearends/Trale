@@ -1,5 +1,3 @@
-<!-- Freno de emergencia:  -->
-
 <template>
     <div class="flex justify-center content-center items-center fixed top-0 left-0 h-screen w-screen bg-gray-900/50 modal-content">
         <div class="bg-white p-3 w-9/10 max-w-sm rounded shadow-md ">
@@ -19,8 +17,6 @@
         </div>
     </div>
 </template>
-
-<!-- inputA = Board Title  - inputB = Board Color -->
 
 <script setup>
 import { ref } from "vue";
@@ -43,21 +39,12 @@ function handleCloseBtnClick(){
 }
 console.log(props.boardId);
 
-// const data = ()=>({
-//     inputA,
-//     inputB
-// })
-
 async function getUser() {
     const myUser = await user.fetchUser()
     return myUser;
 }
 
-
-//createTasks(title, is_complete, user_id, board_id)
-
 async function submit(){
-    // emits("submit", {inputA, inputB});
     const myUser = await getUser()
     if(props.typeModal === "board"){
         await board.createBoards(inputA.value, myUser.id, inputB.value);
@@ -72,7 +59,6 @@ async function submit(){
     } catch(error){
         console.log("Error:" +error.message)
     };
-
 }}
 
 function refreshPage(){

@@ -23,12 +23,9 @@ export const useTaskStore = defineStore("Tasks", {
       }
     },
 
-// const { rows } = await supabase.from('tasks').select('id').where({ task_name: 'My Task' });
-// const taskId = rows[0].id;
-
     async fetchTasks(boardId) {
       try {
-        const { data: tasks, error } = await supabase  //data: tasks
+        const { data: tasks, error } = await supabase 
         .from("Tasks")
         .select()
         .eq('board_id', boardId)
@@ -51,7 +48,6 @@ export const useTaskStore = defineStore("Tasks", {
       if (error) {
         console.log(error);
       } else {
-        // this.tasks.push(taskCreated[0]);
         this.tasks.push(taskCreated);
       };
       refreshPage();
@@ -73,50 +69,51 @@ export const useTaskStore = defineStore("Tasks", {
       }
     },
 
-    async updateTitleTask(title, task_id, board_id) {
+    async updateTitleTask(title, taskId, board_id) {
       const { data, error } = await supabase
         .from("Tasks")
         .update({ title: title, board_id: board_id })
-        .match({ id: task_id });
+        .eq('task_id', taskId);
     },
 
-    async editTask(title, task_id, created_at, board_id) {
+    async editTask(title, taskId, created_at, board_id) {
       try {
         const { error } = await supabase
-          .from("tasks")
+          .from("Tasks")
           .update({
             title: title,
-            task_id: task_id,
+            taskId: taskId,
             created_at: created_at,
             board_id: board_id,
             is_complete: false,
           })
-          .match({ task_id: task_id });
+          .eq('task_id', taskId);
       } catch (error) {
         throw error.message;
       }
     },
 
-    async completeTask(id) {
+    async completeTask(taskId) {
       try {
         const { error } = await supabase
-          .from("tasks")
+          .from("Tasks")
           .update({ is_complete: true, completed_at: new Date() })
-          .eq("task_id", task_id);
+          .eq('task_id', taskId);
       } catch (error) {}
     },
 
-    async updateIsCompleteTask(is_complete, task_id, board_id) {
+    async updateIsCompleteTask(is_complete, taskId, board_id) {
       const { data, error } = await supabase
         .from("Tasks")
-        .update({ is_complete: is_complete, board_id: board_id, id: task_id })
+        .update({ is_complete: is_complete})
+        .match({board_id: board_id, task_id: taskId })
     },
 
-    async updateTaskPosition(board_id, task_id, new_position) {
+    async updateTaskPosition(board_id, taskId, new_position) {
     const { data, error } = await supabase
     .from("Tasks")
     .update({ position: new_position })
-    .where({ board_id: board_id, id: task_id });
+    .where({board_id: board_id, task_id: taskId })
     },
     
   },

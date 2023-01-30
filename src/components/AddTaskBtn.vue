@@ -25,8 +25,6 @@ import Modal from './Modal.vue';
 const emits = defineEmits(["addTask"]);
 const props = defineProps(["boardId"])
 
-//  console.log(props.boardId);
-
 data: () => ({
     showModal
 })
@@ -36,10 +34,6 @@ function handleSubmit(data) {
     emits("addTask", {...data, boardId});
     this.showModal = false;
 }
-
-// function handleSubmit(showModal){
-//     this.showModal = false;
-// }
 
 </script>
 

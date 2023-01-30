@@ -52,7 +52,6 @@ export const useBoardStore = defineStore("Boards", {
         .from("Boards")
         .delete()
         .eq('id', board_id)
-        // .catch(e => console.error(e));
       return {data, error};
     },
 

@@ -31,10 +31,6 @@ function handleSubmit(data) {
     this.showModal = false;
 }
 
-// function handleSubmit(showModal){
-//     this.showModal = false;
-// }
-
 </script>
 
 <style scoped>
