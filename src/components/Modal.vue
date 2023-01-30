@@ -65,11 +65,12 @@ async function submit(){
         refreshPage();
     } else if(props.typeModal === "task") {
         console.log(inputA.value, props.boardId);
-        try {await task.createTasks(inputA.value, props.boardId);
+        try {
+            await task.createTasks(inputA.value, props.boardId);
         emits("close");
         refreshPage();
-    }catch(error){
-        console.log(error.message)
+    } catch(error){
+        console.log("Error:" +error.message)
     };
 
 }}

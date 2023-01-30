@@ -4,7 +4,7 @@
             <span><i class="fas fa-sort" :style="{color: clr}"></i>{{ task }}</span>
             <span>
                 <i class="fas fa-check" :style="{color: clr}"></i>
-                <i class="fas fa-trash" @click="getTaskId(task.id, $event)"></i>
+                <i class="fas fa-trash" @click="handleDeleteTask(taskId)"></i>
             </span>
         </div>
     </div>
@@ -21,14 +21,21 @@ const taskStore = useTaskStore();
 // board_id = props.id
 
 const props = defineProps (["task", "clr", "boardId", "taskId"]);
+const emits = defineEmits(["refresh"])
 
-function getTaskId (event) {
-  const taskId = event.target.taskId;
-  console.log(getTaskId);
-}
+// function getTaskId (event) {
+//   const taskId = event.target.taskId;
+//   console.log(getTaskId);
+// }
 
 
 // const emits = defineEmits(['refresh']);
+const taskId = props.taskId
+
+const handleDeleteTask = (taskId) => {
+    taskStore.deleteTask(taskId);
+    emits('refresh');
+};
 
 // const deleteTask = (taskId) => {
 //     taskStore.deleteTask(taskId);

@@ -24,8 +24,10 @@
                 </div>
                 freno: funciona todo bien
             </div> -->
-            <Task v-for="(task, task_id) in tasks" :key="task_id" :task="task.title" :boardId="id" :taskId="task_id"
+            <Task v-for="(task) in tasks" :key="task.task_id" :task="task.title" :boardId="id" :taskId="task.task_id"
                 :clr="boardFromParent.color" @refresh="getAllTasks" />
+            <!-- <Task v-for="(task, task_id) in tasks" :key="task_id" :task="task.title" :boardId="id" :taskId="task_id"
+                :clr="boardFromParent.color" @refresh="getAllTasks" /> -->
             <!-- <Task v-for="(task, task_id) in tasks" :key="task_id" :task="task.title" :boardId="id" :taskId="task_id"
                 :clr="boardFromParent.color" @refresh="getAllTasks" /> -->
         </div>

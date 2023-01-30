@@ -51,7 +51,8 @@ export const useTaskStore = defineStore("Tasks", {
       if (error) {
         console.log(error);
       } else {
-        this.tasks.push(taskCreated[0]);
+        // this.tasks.push(taskCreated[0]);
+        this.tasks.push(taskCreated);
       };
       refreshPage();
     },
@@ -64,7 +65,7 @@ export const useTaskStore = defineStore("Tasks", {
       const { error } = await supabase
         .from("Tasks")
         .delete()
-        .eq('id', taskId);
+        .eq('task_id', taskId);
       if (error) {
         console.log(error);
       } else {
