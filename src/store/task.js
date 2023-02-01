@@ -54,14 +54,11 @@ export const useTaskStore = defineStore("Tasks", {
     },
 
     async deleteTask(taskId) {
-      if (!taskId) {
-        console.log("Task ID is not provided");
-        return;
-    }
-      const { error } = await supabase
+      const { data, error } = await supabase
         .from("Tasks")
         .delete()
         .eq('task_id', taskId);
+      return {data, error}
       if (error) {
         console.log(error);
       } else {
@@ -103,12 +100,19 @@ export const useTaskStore = defineStore("Tasks", {
 
     async completeTask(taskId) {
       try {
-        const { error } = await supabase
+        const { data, error } = await supabase
           .from("Tasks")
-          .update({ is_complete: true, completed_at: new Date() })
+          .update({ is_complete: true})
           .eq('task_id', taskId);
-      } catch (error) {}
-    },
+          return {data, error}; 
+          if (error) {
+            throw new Error(error);
+          }
+          return data;
+        } catch (error) {
+          console.error(error);
+        }
+      },
 
     async updateIsCompleteTask(is_complete, taskId, boardId) {
       const { data, error } = await supabase

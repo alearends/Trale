@@ -1,17 +1,14 @@
 <template>
     <div class="task-container rounded py-1 my-2" >
         <div class="flex flex-row justify-between items-center mx-2 my-1">
-
             <div>
                 <i class="fas fa-sort handle" :style="{color: clr}"></i>
                 <span class="" :style="[taskFromParent.is_complete ? {'text-decoration':'line-through', color: clr } : {'text-decoration':'none', } ]" >{{task}}</span>
             </div>
-            
             <div>
-                <input type="checkbox" v-model="taskFromParent.is_complete">
+                <input type="checkbox" v-model="taskFromParent.is_complete" >
                 <i class="fas fa-trash" @click="handleDeleteTask(taskId)" :style="{color: clr}"></i>
             </div>
-
         </div>
     </div>
 </template>
@@ -20,7 +17,6 @@
 import { useBoardStore } from "../store/board";
 import { useTaskStore } from "../store/task";
 import { ref } from "vue";
-
 
 const editId = ref(null);
 const is_complete = ref(false);
@@ -32,37 +28,21 @@ const taskStore = useTaskStore();
 const props = defineProps (["task", "clr", "boardId", "taskId", "taskFromParent"]);
 const emits = defineEmits(["refresh"]);
 
-
-
 const taskId = props.taskId;
-
 const task = props.task; 
-
-
-const changeTaskStatus = (task) => {
-    task.done = !task.done;
-};
-
-
 
 const handleDeleteTask = (taskId) => {
     taskStore.deleteTask(taskId);
     emits('refresh');
 };
 
-const changeIsComplete = async (taskId) => {
-    taskId.is_complete = !taskId.is_complete
-        await taskStore.completeTask(taskId)
+const changeIsComplete = async () => {
+    if(taskFromParent.is_complete == true){
+        console.log(taskFromParent.is_complete);
+        await taskStore.completeTask(taskFromParent.task_id)
         await taskStore.fetchTasks();
+    };
 };
-
-const enableEditing = (taskId) => {
-    newTitle.value = taskId.title
-    editId.value = taskId
-    
-};
-
-
 
 </script>
 

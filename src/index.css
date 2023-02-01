@@ -14,6 +14,50 @@
     background-color: #0067A3
 }
 
+.fa-trash {
+    color: gray;
+    margin-left: .75em;
+    cursor: pointer;
+}
+
+.fa-sort{
+    margin-right: .5em;
+    cursor: move;
+}
+
+.fa-check{
+    color: gray;
+    margin-left: .5em;
+    cursor: pointer;
+}
+
+.task-done{
+    text-decoration:line-through;
+}
+
+.board-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5em;
+}
+
+.task-container{
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
+}
+
+.board-color-trale{
+    border-top: 3px solid red;
+    border-radius: 4px;
+}
+
+.text-bg-nav {
+    color: #E5E7EB;
+}
+
+.border-bg-trale {
+    border-color: #0067A3;
+}
+
 .text-trale{
     color: #0067A3
 }

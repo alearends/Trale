@@ -108,7 +108,6 @@ onMounted(async () =>{
         await getAllBoards()
         // const resp = await task.fetchTasks();
         // tasks.value = resp;
-        console.log(data)
     }catch(error){
         console.log(error);
     }

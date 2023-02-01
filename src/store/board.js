@@ -47,7 +47,6 @@ export const useBoardStore = defineStore("Boards", {
     },
 
     async deleteBoards(board_id) {
-      console.log(board_id)
       const { data, error } = await supabase
         .from("Boards")
         .delete()
