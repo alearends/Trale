@@ -25,3 +25,11 @@
 .bg-wordmark {
     background-color: #2A4657;
 }
+
+.list-move{
+    transition: 3s;
+}
+
+.task-done{
+    text-decoration:line-through;
+}

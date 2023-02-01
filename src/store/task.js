@@ -93,6 +93,14 @@ export const useTaskStore = defineStore("Tasks", {
       }
     },
 
+    // const tareaCreada = ({
+    //   title: title,
+    //   taskId: taskId,
+    //   created_at: created_at,
+    //   board_id: board_id,
+    //   is_complete: false
+    // }),
+
     async completeTask(taskId) {
       try {
         const { error } = await supabase
@@ -102,11 +110,11 @@ export const useTaskStore = defineStore("Tasks", {
       } catch (error) {}
     },
 
-    async updateIsCompleteTask(is_complete, taskId, board_id) {
+    async updateIsCompleteTask(is_complete, taskId, boardId) {
       const { data, error } = await supabase
         .from("Tasks")
         .update({ is_complete: is_complete})
-        .match({board_id: board_id, task_id: taskId })
+        .match({board_id: boardId, task_id: taskId })
     },
 
     async updateTaskPosition(board_id, taskId, new_position) {

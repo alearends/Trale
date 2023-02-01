@@ -114,27 +114,6 @@ onMounted(async () =>{
     }
 });
 
-// async function getAllTasks(){
-//     const resp = await task.fetchTasks(); 
-//         tasks.value = resp;
-// }
-
-// onMounted(async () =>{
-//     console.log("esta task esta Montada");
-//     try{
-//         await getAllTasks()
-//         // const resp = await task.fetchTasks();
-//         // tasks.value = resp;
-//         console.log(data)
-//     }catch(error){
-//         console.log(error);
-//     }
-// });
-
-
-
-
-
 </script>
     
 <style scoped>

@@ -3,10 +3,7 @@
         <button @click="showModal = true"
             class="bg-trale text-white font-bold py-1 px-2 rounded focus:outline-none focus:shadow-outline duration-200 border-none font-[Nunito]"
             type="submit"> + Add Task</button>
-        <!-- <button
-            @click="showModal = true" class="bg-trale font-bold text-white font-[Nunito] py-1 px-2 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700 hover:border-gray-100 hover:text-gray-100 duration-200 border-solid border-2 border-transparent"
-            type="submit"> + add board
-        </button> -->
+        
         <Modal v-if="showModal" 
         title="Add Task" 
         labelA="Enter Task" 

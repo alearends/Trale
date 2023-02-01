@@ -1,11 +1,17 @@
 <template>
     <div class="task-container rounded py-1 my-2" >
         <div class="flex flex-row justify-between items-center mx-2 my-1">
-            <span><i class="fas fa-sort" :style="{color: clr}"></i>{{ task }}</span>
-            <span>
-                <i class="fas fa-check"  :style="{color: clr}"></i>
-                <i class="fas fa-trash" @click="handleDeleteTask(taskId)"></i>
-            </span>
+
+            <div>
+                <i class="fas fa-sort handle" :style="{color: clr}"></i>
+                <span class="" :style="[taskFromParent.is_complete ? {'text-decoration':'line-through', color: clr } : {'text-decoration':'none', } ]" >{{task}}</span>
+            </div>
+            
+            <div>
+                <input type="checkbox" v-model="taskFromParent.is_complete">
+                <i class="fas fa-trash" @click="handleDeleteTask(taskId)" :style="{color: clr}"></i>
+            </div>
+
         </div>
     </div>
 </template>
@@ -13,19 +19,50 @@
 <script setup>
 import { useBoardStore } from "../store/board";
 import { useTaskStore } from "../store/task";
+import { ref } from "vue";
+
+
+const editId = ref(null);
+const is_complete = ref(false);
+const newTitle = ref('');
 
 const board = useBoardStore();
 const taskStore = useTaskStore();
 
-const props = defineProps (["task", "clr", "boardId", "taskId"]);
-const emits = defineEmits(["refresh"])
+const props = defineProps (["task", "clr", "boardId", "taskId", "taskFromParent"]);
+const emits = defineEmits(["refresh"]);
 
-const taskId = props.taskId
+
+
+const taskId = props.taskId;
+
+const task = props.task; 
+
+
+const changeTaskStatus = (task) => {
+    task.done = !task.done;
+};
+
+
 
 const handleDeleteTask = (taskId) => {
     taskStore.deleteTask(taskId);
     emits('refresh');
 };
+
+const changeIsComplete = async (taskId) => {
+    taskId.is_complete = !taskId.is_complete
+        await taskStore.completeTask(taskId)
+        await taskStore.fetchTasks();
+};
+
+const enableEditing = (taskId) => {
+    newTitle.value = taskId.title
+    editId.value = taskId
+    
+};
+
+
 
 </script>
 
@@ -81,5 +118,10 @@ const handleDeleteTask = (taskId) => {
     margin-left: .5em;
     cursor: pointer;
 }
+
+.task-done{
+    text-decoration:line-through;
+}
+
 </style>
 
