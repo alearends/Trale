@@ -22,44 +22,13 @@
                         <i class="fas fa-trash"></i>
                     </span>
                 </div>
-                freno: funciona todo bien
             </div> -->
 
-            <!-- minifreno -->
-
-            <!-- <draggable tag="transition-group" v-model="tasks" item-key="name" group="tasks" handle=".handle" @change="log"
-                :component-data="{name: 'fade'}">
-                <template #item="{ element, taskId }"> -->
-                    <Task v-for="(task) in tasks" :key="task.task_id" :taskFromParent="task" :task="task.title" :boardId="id"
-                        :taskId="task.task_id" :clr="boardFromParent.color" @refresh="getAllTasks" />
-
-                <!-- </template>
-            </draggable> -->
-
-
-
-            <!-- minifreno -->
-
-            <!-- <draggable tag="transition-group" v-model="tasks" item-key="name" group="tasks" handle=".handle" @change="log"
-                :component-data="{name: 'fade'}">
-                <template #item="{ element, taskId }">
-                    <Task v-for="(task) in tasks" :key="task.task_id" :task="task.title" :boardId="id"
-                        :taskId="task.task_id" :clr="boardFromParent.color" @refresh="getAllTasks">{{ element.name }}{{ taskId }}
-                    </Task>
-                </template>
-            </draggable> -->
-
-
-            <!-- <Task v-for="(task) in tasks" :key="task.task_id" :task="task.title" :boardId="id" :taskId="task.task_id"
-                :clr="boardFromParent.color" @refresh="getAllTasks">
-                <draggable tag="Task" v-model="tasks" item-key="taskId" group="tasks" handle=".handle" @change="log"
-                    :component-data="getComponentData()">
-                    <template #item="{ element }">{{ element.taskId }}</template>
-                </draggable>
-            </Task> -->
-
-
-
+            FRENO: codigo funcionando y commited
+            <Task v-for="(task) in tasks" :key="task.task_id" :taskFromParent="task" :task="task.title" :boardId="id"
+                :taskId="task.task_id" :clr="boardFromParent.color" @refresh="getAllTasks" />
+            FRENO: codigo funcionando y commited
+            
             <!-- <Task v-for="(task, task_id) in tasks" :key="task_id" :task="task.title" :boardId="id" :taskId="task_id"
                 :clr="boardFromParent.color" @refresh="getAllTasks" /> -->
             <!-- <Task v-for="(task, task_id) in tasks" :key="task_id" :task="task.title" :boardId="id" :taskId="task_id"
