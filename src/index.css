@@ -7,11 +7,11 @@
 - Dark: #2A4657  */
 
 :root{
-    background-color:#0067A3 ;
+    background-color:#445D73 ;
 }
 
 .bg-trale {
-    background-color: #0067A3
+    background-color: #445D73
 }
 
 .fa-trash {
@@ -26,7 +26,7 @@
 }
 
 .fa-check{
-    color: gray;
+    color: #445D73;
     margin-left: .5em;
     cursor: pointer;
 }
@@ -51,23 +51,23 @@
 }
 
 .text-bg-nav {
-    color: #E5E7EB;
+    color: #F3F3F3;
 }
 
 .border-bg-trale {
-    border-color: #0067A3;
+    border-color: #445D73;
 }
 
 .text-trale{
-    color: #0067A3
+    color: #445D73
 }
 
 .wordmark-color {
-    color: #2A4657;
+    color: #445D73;
 }
 
 .bg-wordmark {
-    background-color: #2A4657;
+    background-color: #445D73;
 }
 
 .list-move{

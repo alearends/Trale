@@ -104,7 +104,7 @@ export const useTaskStore = defineStore("Tasks", {
           .from("Tasks")
           .update({ is_complete: true})
           .eq('task_id', taskId);
-          return {data, error}; 
+          return {data, error} 
           if (error) {
             throw new Error(error);
           }

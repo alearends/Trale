@@ -32,16 +32,10 @@
                     type="submit">
                     Iniciar sesión
                 </button>
-                <a class="inline-block align-baseline font-bold text-center text-sm text-trale hover:text-blue-900 font-[Nunito]"
-                    href="#">
-                    ¿Olvidaste tu contraseña?
-                </a>
-            </div>
-            <div class="text-center">
                 <router-link
-                    class="mx-auto my-6 md:my-0 text-l wordmark-color font-bold hover:text-trale duration-500 cursor-pointer font-[Nunito]"
-                    :to="{ name: 'Register' }">¿No tienes una cuenta?<span class="text-trale hover:wordmark-color">  Regístrate aquí</span></router-link>
-            </div>
+                    class="inline-block align-baseline text-center text-l wordmark-color font-bold hover:text-resalta duration-500 cursor-pointer font-[Nunito]"
+                    :to="{ name: 'Register' }">¿No tienes una cuenta?<br><span class="text-resalta underline hover:wordmark-color">  Regístrate aquí</span></router-link>
+                </div>
         </form>
 
     </div>
@@ -91,19 +85,23 @@ const signInWithEmail = async () => {
 
 <style scoped>
 .bg-trale {
-    background-color: #0067A3;
+    background-color: #445D73;
 }
 
+.text-resalta {
+    color: #869FB1;
+};
+
 .text-trale{
-    color: #0067A3;
+    color: #445D73;
 }
 
 .wordmark-color {
-    color: #2A4657;
+    color: #445D73;
 }
 
 .bg-nav {
-    background-color: #E5E7EB;
+    background-color: #F3F3F3;
 }
 
 </style>

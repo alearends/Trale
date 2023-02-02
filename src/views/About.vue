@@ -14,10 +14,10 @@ import HomeNavBar from '../components/HomeNavBar.vue';
 
 <style scoped>
 .text-trale{
-    color: #0067A3;
+    color: #445D73;
 }
 
 .wordmark-color {
-    color: #2A4657;
+    color: #445D73;
 }
 </style>

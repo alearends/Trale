@@ -36,25 +36,25 @@ function handleSubmit(data) {
 
 <style scoped>
 .bg-nav {
-    background-color: #E5E7EB;
+    background-color: #F3F3F3;
 }
 .text-nav {
-    color: #E5E7EB;
+    color: #F3F3F3;
 }
 .wordmark-color {
-    color: #2A4657;
+    color: #445D73;
 }
 .dropbtn {
     border: none;
     background: none;
 }
 .bg-trale {
-    background-color: #0067A3;
+    background-color: #445D73;
 }
 .text-trale {
-    color: #0067A3
+    color: #445D73;
 }
 .bg-wordmark-color {
-    background-color: #2A4657;
+    background-color: #445D73;
 }
 </style>

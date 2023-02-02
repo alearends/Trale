@@ -87,7 +87,7 @@ methods: {
 
 <style scoped>
 .bg-trale {
-    background-color: #0067A3;
+    background-color: #445D73;
 }
 </style>
 

@@ -51,7 +51,7 @@ async function submit(){
         emits("close");
         refreshPage();
     } else if(props.typeModal === "task") {
-        console.log(inputA.value, props.boardId);
+        console.log(inputA.value, props.boardId, inputB.value);
         try {
             await task.createTasks(inputA.value, props.boardId);
         emits("close");
@@ -72,13 +72,13 @@ function refreshPage(){
     backdrop-filter: blur(5px);
 }
 .bg-trale {
-    background-color: #0067A3;
+    background-color: #445D73;
 }
 .text-trale{
-    color: #0067A3
+    color: #445D73
 }
 .bg-wordmark-color {
-    background-color: #2A4657;
+    background-color: #445D73;
 }
 input[type="color"]{
     padding: .1em .5em;

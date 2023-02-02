@@ -99,19 +99,19 @@ const register = async () => {
 
 <style scoped>
 .bg-trale {
-    background-color: #0067A3;
+    background-color: #445D73;
 }
 
 .text-trale {
-    color: #0067A3;
+    color: #445D73;
 }
 
 .wordmark-color {
-    color: #2A4657;
+    color: #445D73;
 }
 
 .bg-nav {
-    background-color: #E5E7EB;
+    background-color: #F3F3F3;
 }
 </style>
 

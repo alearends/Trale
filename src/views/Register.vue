@@ -51,7 +51,7 @@
                 <div class="text-center">
                     <router-link
                         class="my-6 md:my-0 text-l wordmark-color font-bold hover:text-trale duration-500 cursor-pointer font-[Nunito]"
-                        :to="{ name: 'Login' }">¿Ya tienes una cuenta?<span class="text-trale hover:wordmark-color">
+                        :to="{ name: 'Login' }">¿Ya tienes una cuenta?<br><span class="text-resalta underline hover:wordmark-color">
                             Login</span></router-link>
                 </div>
             </div>
@@ -110,18 +110,22 @@ const register = async () => {
 
 <style scoped>
 .bg-trale {
-    background-color: #0067A3;
+    background-color: #445D73;
 }
 
+.text-resalta {
+    color: #869FB1;
+};
+
 .text-trale {
-    color: #0067A3;
+    color: #445D73;
 }
 
 .wordmark-color {
-    color: #2A4657;
+    color: #445D73;
 }
 .bg-nav {
-    background-color: #E5E7EB;
+    background-color: #F3F3F3;
 }
 
 </style>

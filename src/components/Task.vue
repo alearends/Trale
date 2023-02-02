@@ -50,15 +50,15 @@ const changeIsComplete = async () => {
 
 <style scoped>
 .bg-trale {
-    background-color: #0067A3;
+    background-color: #445D73;
 }
 
 .text-bg-nav {
-    color: #E5E7EB;
+    color: #F3F3F3;
 }
 
 .border-bg-trale {
-    border-color: #0067A3;
+    border-color: #445D73;
 }
 
 .board-container {
@@ -94,7 +94,7 @@ const changeIsComplete = async () => {
 }
 
 .fa-check{
-    color: gray;
+    color: #445D73;
     margin-left: .5em;
     cursor: pointer;
 }

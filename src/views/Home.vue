@@ -83,14 +83,14 @@ import HomeNavBar from "../components/HomeNavBar.vue";
 
 <style scoped>
 .border-bg-gif {
-    border-color: #0278BD;
+    border-color: #445D73;
 }
 
 .text-bg-gif {
-    color: #0278BD;
+    color: #445D73;
 }
 
 .bg-gif {
-    background-color: #0278BD;
+    background-color: #445D73;
 }
 </style>
