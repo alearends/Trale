@@ -35,8 +35,6 @@
     </div>
 </template>
 
-<!-- FRENO DE EMERGENCIA -->
-
 <script>
 import Task from "../components/Task.vue";
 import AddTaskBtn from "./AddTaskBtn.vue";
@@ -45,7 +43,7 @@ import { useBoardStore } from "../store/board";
 import { useTaskStore } from "../store/task";
 import { useUserStore } from "../store/user";
 import { supabase } from "../supabase/supabase";
-// import { supabaseClient } from "@supabase/supabase-js";
+
 
 
 
@@ -163,101 +161,11 @@ export default {
 </script>
 
 
-<!-- <script setup>
-import Task from "../components/Task.vue";
-import AddTaskBtn from "./AddTaskBtn.vue";
-import draggable from "vuedraggable";
-import { useBoardStore } from "../store/board";
-import { useTaskStore } from "../store/task";
-import { useUserStore } from "../store/user";
-import { ref, onMounted } from "vue";
-
-const board = useBoardStore();
-const userStore = useUserStore();
-const taskStore = useTaskStore();
-const boardStore = useBoardStore();
-
-const tasks = ref([]);
-
-const props = defineProps(["boardFromParent", "id", "task_id"]);
-console.log(props.id)
-
-async function getAllTasks() {
-    const res = await board.getBoard(props.id);
-    const tasksRes = await taskStore.fetchTasks(props.boardFromParent.id);
-    if (tasksRes) {
-        tasks.value = tasksRes;
-        console.log(tasks.value)
-    }
-    console.log(tasksRes)
-}
-
-onMounted(async () => {
-    try {
-        console.log("esta tarea esta Montada!")
-        await getAllTasks()
-    } catch (error) {
-        console.log(error);
-    }
-});
-
-const emits = defineEmits(['refresh']);
-
-const handleBoardDelete = async () => {
-    await board.deleteBoards(props.id);
-    refreshPage();
-};
-
-function refreshPage() {
-    location.reload()
-};
-
-function log(evt) {
-    window.console.log(evt);
-};
-
-function clone(el) {
-    return {
-        name: el.name + " cloned"
-    };
-};
-
-function replace() {
-    this.list = [{ name: "another design task" }];
-};
-
-function add() {
-    this.list.push({ name: "a design task" });
-};
-
-</script> -->
-
 <style scoped>
-.bg-trale {
-    background-color: #0067A3;
-}
-
-.text-bg-nav {
-    color: #E5E7EB;
-}
-
-.border-bg-trale {
-    border-color: #445D73;
-}
-
-.board-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5em;
-}
 
 .board-color-trale {
     border-top: 5px solid red;
     border-radius: 6px;
-}
-
-.task-container {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, .15);
 }
 
 .fa-ban {
@@ -266,20 +174,4 @@ function add() {
     cursor: pointer;
 }
 
-.fa-trash {
-    color: gray;
-    margin-left: .75em;
-    cursor: pointer;
-}
-
-.fa-sort {
-    margin-right: .5em;
-    cursor: move;
-}
-
-.fa-check {
-    color: gray;
-    margin-left: .5em;
-    cursor: pointer;
-}
 </style>

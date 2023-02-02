@@ -47,33 +47,14 @@ const logout = async () => {
 </script>
 
 <style scoped>
-.bg-nav {
-    background-color: #F3F3F3;
-}
-
-.text-nav{
-    color: #F3F3F3;
-}
 
 .wordmark-color {
     color: #445D73;
-}
-
-.bg-wordmark-color {
-    background-color: #445D73;
-}
-
-.dropbtn {
-    border: none;
-    background: none;
 }
 
 .bg-trale {
     background-color: #445D73;
 }
 
-.text-trale{
-    color: #445D73;
-}
 
 </style>

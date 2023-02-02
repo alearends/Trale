@@ -3,15 +3,24 @@
 @tailwind utilities;
 
 /* Colores:
-- Primario: #0067A3
-- Dark: #2A4657  */
+- Primario Original: #0067A3
+- Primario Final: #445D73
+- Resaltar: #869FB1  */
 
 :root{
     background-color:#445D73 ;
 }
 
 .bg-trale {
-    background-color: #445D73
+    background-color: #445D73;
+}
+
+.text-resalta {
+    color: #869FB1;
+};
+
+.bg.resalta {
+    background-color: #869FB1;
 }
 
 .fa-trash {
