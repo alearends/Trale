@@ -33,6 +33,10 @@ const router = createRouter({
       name: "About",
       component: About,
     },
+    {
+      path: '/*',
+      component: 404,
+      }
   ]
 });
 
